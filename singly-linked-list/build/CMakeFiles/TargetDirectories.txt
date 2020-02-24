@@ -1,3 +1,0 @@
-/home/yizhua/Documents/LeetCode/singly-linked-list/build/CMakeFiles/edit_cache.dir
-/home/yizhua/Documents/LeetCode/singly-linked-list/build/CMakeFiles/sLinkList.dir
-/home/yizhua/Documents/LeetCode/singly-linked-list/build/CMakeFiles/rebuild_cache.dir

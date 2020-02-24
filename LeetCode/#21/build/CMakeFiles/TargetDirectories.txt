@@ -1,3 +1,0 @@
-/home/yizhua/Documents/CPlusPlus/LeetCode/#21/build/CMakeFiles/edit_cache.dir
-/home/yizhua/Documents/CPlusPlus/LeetCode/#21/build/CMakeFiles/test21.dir
-/home/yizhua/Documents/CPlusPlus/LeetCode/#21/build/CMakeFiles/rebuild_cache.dir

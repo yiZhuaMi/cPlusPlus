@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/test7.dir/src/main.cpp.o  -o test7 -rdynamic 

@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/sLinkList.dir/src/main.cpp.o CMakeFiles/sLinkList.dir/src/List.cpp.o  -o sLinkList -rdynamic 

@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/test21.dir/src/main.cpp.o CMakeFiles/test21.dir/src/List.cpp.o  -o test21 -rdynamic 

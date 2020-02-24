@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yizhua/Documents/LeetCode/singly-linked-list/src/List.cpp
+List.h
+/home/yizhua/Documents/LeetCode/singly-linked-list/src/List.h
+
+/home/yizhua/Documents/LeetCode/singly-linked-list/src/List.h
+iostream
+-
+
+/home/yizhua/Documents/LeetCode/singly-linked-list/src/main.cpp
+iostream
+-
+List.h
+/home/yizhua/Documents/LeetCode/singly-linked-list/src/List.h
+

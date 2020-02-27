@@ -47,13 +47,14 @@ public:
     // j指向排好序的最后一个
     // 当找到与j不相等的j+1=i
     int removeDuplicates(vector<int>& nums) {
-        if (nums.size() < 2) 
+        
+        if (nums.size() <= 1)
             return nums.size();
         int j = 0;
-        for (int i = 1; i < nums.size(); i++)
-            if (nums[j] != nums[i]) 
-                nums[++j] = nums[i];
-        return ++j;
+        for (size_t i = 0; i < nums.size(); i++)
+            if (nums[i] != nums[j])
+                nums[++j] = nums[i];            
+        return j+1;
     }
 };
 

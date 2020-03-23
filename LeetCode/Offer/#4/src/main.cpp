@@ -6,14 +6,30 @@ using namespace std;
 
 class Solution {
 public:
-    bool Find(int target, vector<vector<int>> array) {
+    bool findNumberIn2DArray(int target, vector<vector<int> > matrix) {
         
+        if (matrix.empty() || matrix[0].empty())
+            return false;
+        
+        int row = matrix.size();
+        int col = matrix[0].size();
+        for (size_t i = 0; i < row; i++)// 行
+        {
+            if (matrix[i][0] > target || matrix[i][col-1] < target)
+                continue;
+        
+            for (size_t j = 0; j < col; j++)// 列
+                if (matrix[i][j] == target)
+                    return true;
+        }
+        return false;
     }
 };
 
 int main()
-{
-    vector<vector<int>> array = {{1,2,3},{4,5,6},{7,8,9}};
+{   
+    // vector<vector<int> > v = {{1,2,3},{4,5,6},{7,8,9}};
+    vector<vector<int> > v = {{}};
     Solution s;
-    printf("%b\n",s.Find(7,array));
+    printf("%d\n",s.findNumberIn2DArray(1,v));
 }

@@ -21,6 +21,7 @@ public:
         int right = maxDepth(root->right);
         return 1 + (left > right ? left : right);
     }
+    // 层序遍历
     int maxDepth2(TreeNode* root) {
         if(root == NULL)
             return 0;
@@ -28,7 +29,7 @@ public:
         queue<TreeNode *> que;
         que.push(root);
         while(!que.empty()){
-            int n = que.size();
+            int n = que.size();// size()会变
             for(int i = 0;i < n;++i){
                 TreeNode *cur = que.front();
                 // 队头节点若有叶子节点就都入队 再弹出队头
@@ -37,29 +38,6 @@ public:
                 if(cur->right != NULL)
                     que.push(cur->right);
                 que.pop();
-            }
-            num++;
-        }
-        return num;
-    }
-    int maxDepth3(TreeNode* root)
-    {
-        if (root == NULL)
-            return 0;
-        int num = 0, n;
-        queue<TreeNode*> q;
-        q.push(root);
-        while (!q.empty())// 每一次wihle代表树中的一层
-        {
-            n = q.size();
-            for (size_t i = 0; i < n; i++)
-            {
-                TreeNode* node = q.front();
-                if (node->left != NULL)
-                    q.push(node->left);
-                if (node->right != NULL)
-                    q.push(node->right);
-                q.pop();// 弹出这层的其中一个节点
             }
             num++;
         }
@@ -88,5 +66,5 @@ int main()
     TreeNode* root = createBinTree(list, 0);
     
     Solution s;
-    printf("%d\n",s.maxDepth3(root));
+    printf("%d\n",s.maxDepth(root));
 }

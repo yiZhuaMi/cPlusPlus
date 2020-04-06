@@ -1,5 +1,4 @@
-//#21.合并两个有序链表
-//传进来的链表是没有头结点的!!!!!!!!!!!!!!!!!!
+//#面试题25 合并两个排序的链表
 
 #include <iostream>
 using namespace std;
@@ -13,7 +12,6 @@ struct ListNode {
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-
         ListNode *p1 = l1, *p2 = l2;        
         ListNode *pHead = new ListNode(-1);
         ListNode *p = pHead;

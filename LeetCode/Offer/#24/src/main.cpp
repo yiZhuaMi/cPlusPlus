@@ -11,7 +11,7 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
+    ListNode* reverseList2(ListNode* head) {
         if (head == NULL) return NULL;
         ListNode *p1 = head, *p2, *p3;
         if (p1->next == NULL)
@@ -39,6 +39,18 @@ public:
             head->next = NULL;
             return p2;
         }       
+    }
+
+    ListNode* reverseList(ListNode* head) {
+        ListNode *pre = NULL, *cur = head, *next = NULL;
+        while (cur != NULL)
+        {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;    
+        }
+        return pre;
     }
 };
 

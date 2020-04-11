@@ -12,7 +12,7 @@ struct ListNode {
 
 class Solution {
 public:
-    vector<int> reversePrint(ListNode* head) {
+    vector<int> reversePrint2(ListNode* head) {
         if (head == NULL) return {};
         vector<int> v, w;
         ListNode *p = head;
@@ -28,10 +28,10 @@ public:
             w.push_back(v[i]);
         return w;
     }
-    vector<int> reversePrint2(ListNode* head) {
+    vector<int> reversePrint(ListNode* head) {
         if(!head)
             return {};
-        vector<int> a=reversePrint(head->next);
+        vector<int> a = reversePrint(head->next);
         a.push_back(head->val);
         return a;
     }

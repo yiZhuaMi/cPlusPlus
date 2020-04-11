@@ -132,6 +132,31 @@ public:
             QuickSort(a,key+1,right);
         }
     }
+
+    void Merge(int *a, int l, int q, int r)
+    {
+        int *tmp = new int[r - l + 1]; 
+        int i = 0, left = l, right = q+1;
+        while (left <= q && right <= r)
+            tmp[i++] = a[left] < a[right] ? a[left++] : a[right++];
+        while (left <= q)
+            tmp[i++] = a[left++];
+        while (right <= r)
+            tmp[i++] = a[right++];
+        for (size_t j = 0; i < r-l+1; j++)
+            a[i] = tmp[i];
+        delete[] tmp;        
+    }
+
+    void MergeSort(int *a, int l, int r)
+    {
+        if (l == r)
+            return;
+        int q = (l + r) / 2;
+        MergeSort(a,l,q);     
+        MergeSort(a,q+1,r);   
+        Merge(a,l,q,r);
+    }
     
 };
 
@@ -156,4 +181,11 @@ int main()
     clock_t time_end = clock();
     cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) QuickSort ";
     print_a(d,len);
+
+    int e[] = {10,1};
+    time_start = clock();
+    s.MergeSort(e,0,2);
+    time_end = clock();
+    cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) MergeSort ";
+    print_a(e,2);
 }

@@ -1,4 +1,4 @@
-//#26.删除排序数组中的重复项
+//#27 移除元素
 
 #include <iostream>
 #include <vector>

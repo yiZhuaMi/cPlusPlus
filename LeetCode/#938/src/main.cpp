@@ -48,11 +48,12 @@ public:
         }
         return root;        
     }
-
+    
+    // 深度优先DFS遍历整颗树 累加范围内的根节点
     int rangeSumBST(TreeNode* root, int L, int R) {
         if (root == nullptr)
             return 0;  
-        // 判断当前root是否在要加的范围之内
+        // 判断当前root是否在要加的范围之内 范围内都累加再遍历其子树
         if (L <= root->val && root->val <= R)// L，R分别在根节点的左右 或者其中一个就是根节点
         {
             return root->val// 满足范围的数累加

@@ -19,7 +19,7 @@ public:
             return nullptr;
         if (root->left == nullptr && root->right == nullptr)
             return root;
-        TreeNode *tmp = invertTree(root->left);
+        TreeNode *tmp = invertTree(root->left);// 交换前先递归交换子树
         root->left = invertTree(root->right);
         root->right = tmp;
         return root;

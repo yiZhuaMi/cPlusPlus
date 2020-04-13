@@ -65,6 +65,41 @@ public:
         return root;
     }
 
+    TreeNode* createFromLevelTraverse(vector<int> list)
+    {
+        if (list.empty())
+            return NULL;
+        queue<TreeNode*> q;
+        TreeNode *root = new TreeNode(list[0]);
+        q.push(root);
+        int ind = 1;
+        while (!q.empty())
+        {
+            int len = q.size();
+            for (int i = 0; i < len; i++)
+            {
+                TreeNode *n = q.front();
+                
+                if (ind < list.size())
+                {
+                    n->left = list[ind] == NULL ? nullptr : new TreeNode(list[ind]);
+                    ind++;
+                    if (n->left != NULL)
+                        q.push(n->left);
+                }
+                if (ind < list.size())
+                {
+                    n->right = list[ind] == NULL ? nullptr : new TreeNode(list[ind]);
+                    ind++;
+                    if (n->right != NULL)
+                        q.push(n->right);
+                }
+                q.pop();
+            }
+        }
+        return root;
+    }
+
     static TreeNode* create(vector<int> list, int ind)
     {
         if (ind >= list.size())
@@ -99,7 +134,7 @@ public:
                 {
                     q.push(front->right);
                     r.push(front->right);
-                }    
+                }
                 
                 q.pop();
             }
@@ -122,9 +157,9 @@ int main()
     // vector<int> list = {};
 
     // TreeNode* root = s.createBinTree(list, 0);
-    TreeNode* root = s.create(list, 0);
+    // TreeNode* root = s.create(list, 0);
+    TreeNode* root = s.createFromLevelTraverse(list);
     s.printTree(root);
     s.mirrorTree2(root);
     s.printTree(root);
-
 }

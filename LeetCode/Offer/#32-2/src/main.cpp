@@ -14,7 +14,6 @@ struct TreeNode {
 
 class Solution {
 public:
-    // 递归
     vector<vector<int>> levelOrder(TreeNode* root) {
         if (root == NULL) return {};
         queue<TreeNode*> q;

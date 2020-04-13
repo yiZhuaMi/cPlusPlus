@@ -58,12 +58,48 @@ TreeNode* createBinTree(vector<int> list, int ind)
     return root;
 }
 
+TreeNode* createFromLevelTraverse(vector<int> list)
+{
+    if (list.empty())
+        return NULL;
+    queue<TreeNode*> q;
+    TreeNode *root = new TreeNode(list[0]);
+    q.push(root);
+    int ind = 1;
+    while (!q.empty())
+    {
+        int len = q.size();
+        for (int i = 0; i < len; i++)
+        {
+            TreeNode *n = q.front();
+            
+            if (ind < list.size())
+            {
+                n->left = list[ind] == NULL ? nullptr : new TreeNode(list[ind]);
+                ind++;
+                if (n->left != NULL)
+                    q.push(n->left);
+            }
+            if (ind < list.size())
+            {
+                n->right = list[ind] == NULL ? nullptr : new TreeNode(list[ind]);
+                ind++;
+                if (n->right != NULL)
+                    q.push(n->right);
+            }
+            q.pop();
+        }
+    }
+    return root;
+}
+
 int main()
 {
 
     vector<int> list = {0,2,4,1,NULL,3,-1,5,1,NULL,6,NULL,8};
     // vector<int> list = {3,9,20,NULL,NULL,15,7};
-    TreeNode* root = createBinTree(list, 0);
+    // TreeNode* root = createBinTree(list, 0);
+    TreeNode* root = createFromLevelTraverse(list);
     
     Solution s;
     printf("%d\n",s.maxDepth(root));

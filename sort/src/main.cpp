@@ -137,8 +137,9 @@ public:
     {
         int *tmp = new int[r - l + 1]; 
         int i = 0, left = l, right = q+1;
-        while (left <= q && right <= r)
+        while (left <= q && right <= r)// 以l和q作为起点 逐个将小的放入tmp
             tmp[i++] = a[left] < a[right] ? a[left++] : a[right++];
+        // 剩下的放入
         while (left <= q)
             tmp[i++] = a[left++];
         while (right <= r)
@@ -152,8 +153,8 @@ public:
     {
         if (l == r)
             return;
-        int q = (l + r) / 2;
-        MergeSort(a,l,q);     
+        int q = (l + r) / 2;// 用来分开数组
+        MergeSort(a,l,q);// 左右分别归并排序
         MergeSort(a,q+1,r);   
         Merge(a,l,q,r);
     }

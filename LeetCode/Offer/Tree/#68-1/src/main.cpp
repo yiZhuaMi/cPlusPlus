@@ -20,11 +20,11 @@ public:
         // 利用搜索二叉树的特点，左子树都小于root，右子树都大于root
         if (root->val > p->val && root->val > q->val)// p,q都在左边
         {
-            return lowestCommonAncestor(root->left,p,q);
+            return lowestCommonAncestor2(root->left,p,q);
         }
         else if (root->val < p->val && root->val < q->val)// p,q都在右边
         {
-            return lowestCommonAncestor(root->right,p,q);
+            return lowestCommonAncestor2(root->right,p,q);
         }
         else// 一个在左一个在右或者其中一个就是根节点 说明当前root就是最近公共祖先
         {
@@ -43,10 +43,10 @@ public:
         TreeNode *left = lowestCommonAncestor(root->left,p,q);
         TreeNode *right = lowestCommonAncestor(root->right,p,q);
         
-        if (left && right)
-            return root;
-        if (right)
-            return right;
+        if (left && right)// pq左边有一个 右边有一个
+            return root;// root即为所求最近公共祖先
+        if (right)// 左为空 说明都在右边
+            return right;// 返回右子树
         if (left)
             return left;
         return NULL;

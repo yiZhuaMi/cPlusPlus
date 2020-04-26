@@ -8,19 +8,21 @@ using namespace std;
 
 class Solution {
 public:
-    // bool isPalindrome(int x) {
-    //     string in = to_string(x),out = in;
-    //     reverse(in.begin(),in.end());
-    //     return in.compare(out) ? false : true;
-    // }
+    
     bool isPalindrome(int x) {
+        string in = to_string(x),out = in;
+        reverse(in.begin(),in.end());
+        return in.compare(out) ? false : true;
+    }
+
+    bool isPalindrome2(int x) {
         if(x < 0)
             return false;
         else if (x ==0)
             return true;
         else
         {
-            long y = 0, z = long(x);
+            long y = 0, z = long(x);// y就是将x位数反过来的数
             while (x > 0)
             {
                 y = x % 10 + y * 10;//用int会溢出
@@ -34,5 +36,5 @@ public:
 int main()
 {
     Solution s;
-    printf("%d\n",s.isPalindrome(2147483647));
+    printf("%d\n",s.isPalindrome(12321));
 }

@@ -46,7 +46,7 @@ public:
 // 1使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。
 // 2如果遇到的节点为白色，则将其标记为灰色，然后将其右子节点、自身、左子节点依次入栈。
 // 3如果遇到的节点为灰色，则将节点的值输出。
-    vector<int> inorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal3(TreeNode* root) {
         int white = 0, gray = 1;
         vector<int> v;
         stack<pair<int,TreeNode*>> s;
@@ -67,6 +67,55 @@ public:
             }
             else// 老节点则输出
                 v.push_back(n->val);                
+        }
+        return v;
+    }
+
+    // 左臂入栈法 空间复杂度O(h)
+    //        1
+    //      /   \
+    //     2     3
+    //    / \   /
+    //   4   5 6
+
+    // push   push   push   pop     pop    push     pop     pop 
+    // |   |  |   |  |_4_|  |   |   |   |  |   |    |   |   |   |  
+    // |   |  |_2_|  |_2_|  |_2_|   |   |  |_5_|    |   |   |   |
+    // |_1_|  |_1_|  |_1_|  |_1_|   |_1_|  |_1_|    |_1_|   |   |
+    // ans                  add 4   add 2           add 5   add 1
+    // []                   [4]     [4 2]           [4 2 5] [4 2 5 1]
+    // push   push   pop          pop 
+    // |   |  |   |  |   |        |   |  
+    // |   |  |_6_|  |   |        |   |  
+    // |_3_|  |_3_|  |_3_|        |   |
+    //             add 6        add 3
+    //             [4 2 5 1 6]  [4 2 5 1 6 3]
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        if (root == nullptr)
+            return {};
+        stack<TreeNode*> s;// 用栈保存每一层最左的节点
+        vector<int> v;
+        // 初始化栈
+        while (root != nullptr)
+        {
+            s.push(root);
+            root = root->left;
+        }
+        // 遍历
+        while (!s.empty())
+        {
+            TreeNode* node = s.top();
+            s.pop();
+            v.push_back(node->val);// 遍历
+            // 每pop一个节点，将其右子树做左臂入栈操作。没有右子树就无需操作。
+            // 下面考虑右子树（左子树和根节点早已全部入栈）
+            node = node->right;
+            while (node != nullptr)
+            {
+                s.push(node);// 根节点比左节点先入栈，所以后出栈。
+                node = node->left;
+            }
         }
         return v;
     }

@@ -7,4 +7,4 @@ set(SRC
     ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
-add_executable(exam_wz2 src/main.cpp)
+add_executable(exam_ks2 src/main.cpp)

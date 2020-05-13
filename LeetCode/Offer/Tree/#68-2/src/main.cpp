@@ -1,4 +1,4 @@
-//#面试题68-1 二叉搜索树的最近公共祖先
+//#面试题68-2 二叉树的最近公共祖先
 
 #include <iostream>
 #include <vector>

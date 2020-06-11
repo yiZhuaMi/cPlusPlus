@@ -13,6 +13,7 @@ using namespace std;
 
 class Solution {
 public:
+    // 为什么dp长度+1，下标从1开始，因为求dp[i][j]需要其上、左、左上的元素，所以多处0行0列全为0比较方便。
     int longestCommonSubsequence(string text1, string text2) {
         // dp[i][j]:text1[1~i]和text2[1~j]的最长公共子序列长度。
         vector<vector<int>> dp(text1.length()+1,vector<int>(text2.length()+1,0));
@@ -31,6 +32,27 @@ public:
             }
         }
         return dp[text1.length()][text2.length()];
+    }
+    int longestCommonSubsequence(string text1, string text2) {
+        // dp[i][j]:text1[0~i]和text2[0~j]的最长公共子序列长度。
+        vector<vector<int>> dp(text1.length(),vector<int>(text2.length(),0));
+        if (text1[0] == text2[0])
+            dp[0][0] = 1;
+        for (size_t i = 1; i < text1.length(); i++)
+        {
+            for (size_t j = 1; j < text2.length(); j++)
+            {
+                if (text1[i] == text2[j])
+                {
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }
+                else
+                {
+                    dp[i][j] = max(dp[i][j-1],dp[i-1][j]);
+                }
+            }
+        }
+        return dp[text1.length()-1][text2.length()-1];
     }
 };
 

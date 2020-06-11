@@ -13,6 +13,7 @@ struct TreeNode {
 
 class Solution {
 public:
+    // 下面的代码当t2是t1的一部分但不是t1的子树这种情况（比如t1=[2,1,3]，t2=[2]）会返回false
     bool checkSubTree(TreeNode* t1, TreeNode* t2) {
         if (t1 == nullptr && t2 == nullptr)
             return true;

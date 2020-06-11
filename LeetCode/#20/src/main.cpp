@@ -11,6 +11,7 @@ using namespace std;
 
 class Solution {
 public:
+    // 只包含括号
     bool isValid(string s) {
         stack<char> st;
         if(s.size()%2 != 0) 
@@ -29,10 +30,34 @@ public:
         }
         return st.empty() ? true : false;
     }
+
+    // 考虑其他字符
+    bool isV(string s) {
+        if (s.empty())
+            return true;
+        stack<char> st;
+        for (auto c : s)
+            if (c == '(' || c == '{' || c == '[')
+                st.push(c);
+            else if (c == ')' || c == '}' || c == ']')
+            {
+                if (st.empty())
+                    return false;
+                char ch = st.top();
+                st.pop();
+                if ((c == ')' && ch != c - 1) || ((c == '}' || c == ']') && ch != c - 2))
+                    return false;
+            }
+        if (!st.empty())
+            return false;
+        
+        return true;
+    }
 };
 
 int main()
 {
+    // printf("%d %d %d %d %d %d\n",'(',')','{','}','[',']');
     Solution s;
-    printf("%d\n",s.isValid("){"));
+    printf("%d\n",s.isValid("()(*{})"));
 }

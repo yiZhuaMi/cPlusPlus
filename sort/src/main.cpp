@@ -39,12 +39,13 @@ public:
     }
 
     // 小的逐渐往前 最大的一次性到最后
+    // 最大的第一次沉底，次大的第二次沉底->最后是有序的
     void BubbleSort(int *a, int len) 
     {
         clock_t time_start = clock();
         for (size_t i = 0; i < len-1; i++)//i:已经排序好的个数
         {
-            for (size_t j = 0; j < len-1-i; j++)//最后是排序好的不需要遍历
+            for (size_t j = 0; j < len-1-i; j++)//最后是排序好的不需要遍历(-i:最后有序的 -1:要取j+1)
             {
                 if (a[j] > a[j+1])
                 {
@@ -58,13 +59,14 @@ public:
     }
 
     // 找到(乱序中)最小的交换到有序最后 乱序-1
+    // 最前是有序的
     void SelectionSort(int *a, int len)
     {
         clock_t time_start = clock();
-        for (size_t i = 0; i < len-1; i++)
+        for (size_t i = 0; i < len-1; i++)// 排序len-1次 i=排好个数 
         {
             int min_ind = i;//乱序第一个
-            for (size_t j = i+1; j < len-1; j++)
+            for (size_t j = i+1; j < len; j++)
                 if (a[j] < a[min_ind])
                     min_ind = j;
 
@@ -74,7 +76,7 @@ public:
         cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) SelectionSort ";
         print_a(a,len);
     }
-    
+
     // 要插的值保存下来 比自己大的都往后挪 最后插在比自己小的后面
     // (插入:每一个都要挪动 而选择排序是找到找到最小的交换到有序最后)
     void InsertionSort(int *a, int len)
@@ -98,21 +100,21 @@ public:
 
     int Quick(int *a, int left, int right)
     {
-        int key = left;
+        int key = left;// key选左边一定要先从右边开始移动！！！！！！！！！！！
         while (left < right)
         {
-            while (left < right && a[key] <= a[right])// 右指针指向从右往左第一个小于key的
+            while (left < right && a[key] <= a[right])// 右指针指向从右往左第一个严格小于key的
             {
                 right--;
             }
-            while (left < right && a[left] <= a[key])// 左指针指向从左往右第一个大于key的
+            while (left < right && a[left] <= a[key])// 左指针指向从左往右第一个严格大于key的
             {
                 left++;
             }
             swap(a[right],a[left]);
         }
         // 左右指针(一定会)重合以后 把基准值交换到中间
-        swap(a[key],a[right]);
+        swap(a[key],a[left]);
         return left;// 返回基准值现在的索引 此时左右指针都=基准值序号 返回左右指针都行
     }
     // 快速排序之递归左右指针法
@@ -126,34 +128,38 @@ public:
     {
         if (left < right)
         {
-            int key = Quick(a,left,right);
+            int key = Quick(a,left,right);// 索引小于大于key的都分别在左右两边
             // print_a(a,left,right+1,key);
-            QuickSort(a,left,key-1);
+            QuickSort(a,left,key-1);// 所以key不用再排序了
             QuickSort(a,key+1,right);
         }
     }
 
     void Merge(int *a, int l, int q, int r)
     {
-        int *tmp = new int[r - l + 1]; 
-        int i = 0, left = l, right = q+1;
-        while (left <= q && right <= r)// 以l和q作为起点 逐个将小的放入tmp
+        // printf("合并a[%d:%d]\n",l,r);
+        int *tmp = new int[r - l + 1]; // ！！！！！！！！！！！！！！！！！
+        int i = 0, left = l, right = q+1;// 以l和q+1作为起点
+        while (left <= q && right <= r)// 以q和r作为终点 逐个将小的放入tmp
             tmp[i++] = a[left] < a[right] ? a[left++] : a[right++];
         // 剩下的放入
         while (left <= q)
             tmp[i++] = a[left++];
         while (right <= r)
             tmp[i++] = a[right++];
-        for (size_t j = 0; i < r-l+1; j++)
-            a[i] = tmp[i];
+        for (size_t j = l; j <= r; j++)// a[l:r] = tmp[0:r-l]
+            a[j] = tmp[j-l];
+        // print_a(a+l,r-l+1);
         delete[] tmp;        
     }
-
+    // 左右分别递归到不能拆分，开始合并，先合并左边然后合并右边。
     void MergeSort(int *a, int l, int r)
     {
-        if (l == r)
+        if (l >= r)
             return;
         int q = (l + r) / 2;// 用来分开数组
+        // printf("(q=%d) ",q);
+        // print_a(a+l,r-l+1);
         MergeSort(a,l,q);// 左右分别归并排序
         MergeSort(a,q+1,r);   
         Merge(a,l,q,r);
@@ -183,10 +189,10 @@ int main()
     cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) QuickSort ";
     print_a(d,len);
 
-    int e[] = {10,1};
+    int e[] = {3,6,1,4,8,2,7,9,5,10};
     time_start = clock();
-    s.MergeSort(e,0,2);
+    s.MergeSort(e,0,len-1);
     time_end = clock();
     cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) MergeSort ";
-    print_a(e,2);
+    print_a(e,len);
 }

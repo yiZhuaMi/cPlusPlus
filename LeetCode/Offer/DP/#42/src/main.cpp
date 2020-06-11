@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Solution {
@@ -26,6 +27,20 @@ public:
                 max = dp[i];
         }            
         return max;
+    }
+
+    int maxSubArrayTest(vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+        vector<int> dp(nums.size());// dp[i]:以nums[i]结尾的连续子数组的最大和
+        dp[0] = nums[0];
+        int res = dp[0];
+        for (size_t i = 1; i < nums.size(); i++)
+        {
+            dp[i] = max(nums[i],dp[i-1] + nums[i]);
+            res = max(res,dp[i]);
+        }
+        return res;
     }
 };
 

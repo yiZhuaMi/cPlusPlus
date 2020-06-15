@@ -27,6 +27,21 @@ public:
         return pre;
     }
 
+    ListNode* reverseList3(ListNode* head) {
+        if (head == nullptr || head->next == nullptr)
+            return head;
+        ListNode *pre = nullptr, *cur = head, *next = nullptr;
+        while (cur->next != nullptr)
+        {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
+        }
+        cur->next = pre;
+        return cur;
+    }
+
     // 递归
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr || head->next == nullptr)

@@ -43,4 +43,4 @@ public:
  * CQueue* obj = new CQueue();
  * obj->appendTail(value);
  * int param_2 = obj->deleteHead();
- */s
+ */

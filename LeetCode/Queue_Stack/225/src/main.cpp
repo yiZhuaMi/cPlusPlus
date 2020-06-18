@@ -25,7 +25,7 @@ public:
     /** Push element x onto stack. */
     void push(int x) {
         q.push(x);
-        if (q.size() > 1)
+        if (q.size() > 1)// 每次入队 就把队尾移动到队头
         {
             int size = q.size() -1 ;
             while(size--)

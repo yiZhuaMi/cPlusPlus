@@ -18,38 +18,44 @@ using namespace std;
 class Solution {
 public:
     int myAtoi(string str) {
-        if (str.empty() || (str[0] != '-' && str[0] < '0' && str[0] > '9'))
+        if (str.empty())
             return 0;
-        int start = 0, sign = 1;
-        while (str[start] == ' ' || str[start] == '0')//  "0-1" 预期0 结果-1
-            start++;
-        if (str[start] == '-' || str[start] == '+')
+        int ind = 0; // 指向字符串的指针
+        int len = str.length();
+        // 去掉一开始的所有空格
+        while (ind < len && str[ind] == ' ')
+            ind++;
+        // 全是空格 或者 第一个非空（空格）字符既不是数字也不是正负号
+        if (ind >= len || (str[ind] != '+' && str[ind] != '-' && str[ind] < '0' && '9' < str[ind]))
+            return 0;
+        // 保存符号
+        int sign = 1;
+        // 如果第一个非空是正负号
+        if (str[ind] == '+')
         {
-            sign = str[start] == '-' ? -1 : 1;
-            start++;
-        }    
-        if (str[start] < '0' || str[start] > '9')// 符号后面不是数字
-            return 0;        
-        while (str[start] == '0')
-            start++;
-
-        int end = start;// 左闭右开
-        while (str[end] >= '0' && str[end] <= '9')
-            end++;
-        if (end - start > 10)
-            return sign > 0 ? INT32_MAX : INT32_MIN;
-        int sum = 0;// 绝对值
-        for (int i = 0; i < end - start; i++)
-        {
-            // 改变一下表达式
-            // res * 10 + curVal <= MAX，转化一下 res <= (MAX - curVal)/10 !!!!!!!!!!!!
-            if (sign < 0 && -sum <= INT32_MIN + (str[end - i - 1] - '0') * pow(10,i))// 只会相等 -2147483648 * -1 = -2147483648 ？？？？？
-                return INT32_MIN;
-            else if (sign > 0 && sum >= INT32_MAX - (str[end - i - 1] - '0') * pow(10,i))// 大于INT32_MAX会溢出，溢出以后变最小值（负数）
-                return INT32_MAX;      
-            sum = sum + (str[end - i - 1] - '0') * pow(10,i);// 安全  
+            ind++;
         }
-        return sign * sum;
+        else if (str[ind] == '-')
+        {
+            sign = -1;
+            ind++;
+        }
+        // 假定遇到正负号的后一个是数字
+        int res = 0;
+        while (ind < len && isdigit(str[ind]))
+        {
+            int cur = str[ind] - '0';
+            // 因为下面res要*10，所以用 INT32_MAX/10 来比较现在的res
+            // 2147483647 / 10 = 214748364
+            if (sign == 1 && (res > INT32_MAX / 10 || (res == INT32_MAX / 10 && cur >= 7)))
+                return INT32_MAX;
+            // -2147483648 / -10 = 214748364
+            else if (res > INT32_MIN / -10 || (res == INT32_MIN / -10 && cur >= 8))
+                return INT32_MIN;                
+            res = res * 10 + cur;
+            ind++;
+        }
+        return sign * res;
     }
 };
 

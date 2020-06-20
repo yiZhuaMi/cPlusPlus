@@ -94,7 +94,7 @@ public:
     vector<int> inorderTraversal(TreeNode* root) {
         if (root == nullptr)
             return {};
-        stack<TreeNode*> s;// 用栈保存每一层最左的节点
+        stack<TreeNode*> s;// 一开始用栈保存每一层最左的节点
         vector<int> v;
         // 初始化栈
         while (root != nullptr)
@@ -109,10 +109,11 @@ public:
             s.pop();
             v.push_back(node->val);// 遍历
             // 每pop一个节点，将其右子树做左臂入栈操作。没有右子树就无需操作。
-            // 下面考虑右子树（左子树和根节点早已全部入栈）
+            // 下面考虑右子树（左子树和根节点早已全部入栈并出栈）
             node = node->right;
             while (node != nullptr)
             {
+                // push(根) push(左) pop(左) pop(根) push(右) 。。。
                 s.push(node);// 根节点比左节点先入栈，所以后出栈。
                 node = node->left;
             }

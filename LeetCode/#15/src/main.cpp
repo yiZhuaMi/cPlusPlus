@@ -20,6 +20,7 @@ public:
         {
             if (nums[i] > 0)// 因为递增，后面的都大于零，不可能和为零。
                 return ans;
+            // 变成滑动窗口问题
             int left = i + 1, right = nums.size()-1;
             while (left < right)
             {

@@ -66,9 +66,9 @@ int main()
     n2->next = n3;
     ListNode* m1 = new ListNode(5);
     ListNode* m2 = new ListNode(6);
-    // ListNode* m3 = new ListNode(4);
+    ListNode* m3 = new ListNode(4);
     m1->next = m2;
-    // m2->next = m3;
+    m2->next = m3;
     ListNode* root = s.addTwoNumbers(n1,m1);
     while (root != nullptr)
     {

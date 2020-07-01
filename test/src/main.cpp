@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Solution
@@ -65,13 +66,30 @@ private:
 
 int main()
 {
-    Animal* ani = new Animal(10);
-    Animal* ani2 = new Tiger(20);
-    ani->eat();
-    ani2->eat();
+    vector<int> v = {0,1,2,3,4,5};
+    for (auto ite = v.begin(); ite != v.end()-1;)
+    {
+        printf("ite.val:%d\n",*ite);
+        v.erase(ite);
+    }
+    // v.erase(v.begin()+2,v.begin()+5);
+    for (auto c : v)
+    {
+        printf("%d ",c);
+    }
 
 
+    // Animal* ani = new Animal(10);
+    // Animal* ani2 = new Tiger(20);
+    // ani->eat();
+    // ani2->eat();
 
+    // int a = 42;
+    // // const int a = 42;
+    // const int* ptr = &a;
+    // int* ptr2 = const_cast<int*>(ptr);
+    // *ptr2 = 4;
+    // int c = 1;
 
     // Solution* s = new Solution(1);
     // Solution s1;

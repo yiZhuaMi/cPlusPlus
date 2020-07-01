@@ -137,7 +137,6 @@ public:
 
     void Merge(int *a, int l, int q, int r)
     {
-        // printf("合并a[%d:%d]\n",l,r);
         int *tmp = new int[r - l + 1]; // ！！！！！！！！！！！！！！！！！
         int i = 0, left = l, right = q+1;// 以l和q+1作为起点
         while (left <= q && right <= r)// 以q和r作为终点 逐个将小的放入tmp
@@ -149,7 +148,6 @@ public:
             tmp[i++] = a[right++];
         for (size_t j = l; j <= r; j++)// a[l:r] = tmp[0:r-l]
             a[j] = tmp[j-l];
-        // print_a(a+l,r-l+1);
         delete[] tmp;        
     }
     // 左右分别递归到不能拆分，开始合并，先合并左边然后合并右边。
@@ -158,13 +156,49 @@ public:
         if (l >= r)
             return;
         int q = (l + r) / 2;// 用来分开数组
-        // printf("(q=%d) ",q);
-        // print_a(a+l,r-l+1);
         MergeSort(a,l,q);// 左右分别归并排序
         MergeSort(a,q+1,r);   
         Merge(a,l,q,r);
     }
     
+    // 递归构建大根堆, ind:第一个非叶子结点的下标
+    void adjust(int *a, int len, int ind)
+    {
+        int left = 2 * ind + 1;// ind的左子节点
+        int right = 2 * ind + 2;// ind的右子节点
+
+        int max_ind = ind;// i以及两个子节点中最大的值对应下标
+
+        // 找到三者中的max_ind
+        if (left < len && a[left] > a[max_ind])
+            max_ind = left;
+        if (right < len && a[right] > a[max_ind])
+            max_ind = right;
+        if (max_ind != ind)
+        {
+            swap(a[ind],a[max_ind]);// 把最大的交换到父节点
+            adjust(a,len,max_ind);// 现在max_ind指向较小的子节点 保证子树也是最大堆
+        }
+    }
+    // 堆排序
+    void HeapSort(int *a, int len)
+    {
+        // 构建大根堆（从右往左第一个非叶子节点 len/2-1）
+        // 根节点也要调整 所以i到0
+        for (int i = len / 2 - 1; i >= 0; i--)
+            adjust(a,len,i);
+
+        // 调整大根堆
+        // i越来越小 后面有序的越来越多 排序len-1次
+        for (int i = len - 1; i >= 1; i--)
+        {
+            // 将最大的元素a[0]交换到末尾
+            swap(a[0],a[i]);
+            // 再次对未排序的部分进行堆排序
+            adjust(a,i,0);// i:长度 0:从根节点开始调整
+        }
+    }
+
 };
 
 int main()
@@ -194,5 +228,12 @@ int main()
     s.MergeSort(e,0,len-1);
     time_end = clock();
     cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) MergeSort ";
+    print_a(e,len);
+
+    int f[] = {3,6,1,4,8,2,7,9,5,10};
+    time_start = clock();
+    s.HeapSort(f,len);
+    time_end = clock();
+    cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) HeapSort ";
     print_a(e,len);
 }

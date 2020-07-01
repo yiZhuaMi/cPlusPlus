@@ -69,7 +69,7 @@ public:
         int left_max = max(0,dfs(root->left));
         int right_max = max(0,dfs(root->right));
         maxSum = max(maxSum,root->val + left_max + right_max);// 更新真正的返回值
-        // 返回经过root的单边最大分支给上游
+        // 返回经过root的单边最大分支给上游 若双边则不能连接root的根节点了
         return root->val + max(left_max, right_max);// 返回以当前root为左中右的中间节点的最大路径和
     }
 };

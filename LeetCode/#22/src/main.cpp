@@ -56,7 +56,9 @@ public:
                 helper(line+")",left,right-1);
             else// 左右括号都有
             {
+                // 这一步添加(，line是拷贝的，不需要回溯
                 helper(line+"(",left-1,right);                
+                // 如果符合条件，这一步添加)，line是拷贝的，不需要回溯
                 if (left < right)// 右必须大于左 否则不能添加右括号了
                     helper(line+")",left,right-1);// 递归
             }

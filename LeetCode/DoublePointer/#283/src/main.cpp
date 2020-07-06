@@ -70,8 +70,9 @@ public:
                 nums[low++] = nums[fast];// 把非0填到low
             }
         }
+        // 最后的要填充0
         while (low < nums.size())
-            nums[low++] = 0;
+            nums[low++] = 0;     
     }
 };
 

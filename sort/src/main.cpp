@@ -77,21 +77,24 @@ public:
         print_a(a,len);
     }
 
-    // 要插的值保存下来 比自己大的都往后挪 最后插在比自己小的后面
+    // 比前面的小就与前面的‘交换’，直到比前面的大
     // (插入:每一个都要挪动 而选择排序是找到找到最小的交换到有序最后)
     void InsertionSort(int *a, int len)
     {
         clock_t time_start = clock();
         for (size_t i = 1; i < len; i++)
         {
-            int pre_ind = i-1;
-            int cur = a[i];
-            while (pre_ind >= 0 && a[pre_ind] > cur)// 比他小 他就往后挪
+            if (a[i-1] > a[i])// 跳过比有序的
             {
-                a[pre_ind+1] = a[pre_ind];
-                pre_ind--;
+                int pre_ind = i-1;
+                int cur = a[i];// 保存要插入的
+                while (pre_ind >= 0 && a[pre_ind] > cur)// 比他小 他就往后挪
+                {
+                    a[pre_ind+1] = a[pre_ind];
+                    pre_ind--;
+                }
+                a[pre_ind+1] = cur;// 如果没有移动的 这里不会有变化 i指向的原来的位置早已被后移替换    
             }
-            a[pre_ind+1] = cur;// 如果没有移动的 这里不会有变化 i指向的原来的位置早已被后移替换
         }
         clock_t time_end = clock();
         cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) InsertionSort ";

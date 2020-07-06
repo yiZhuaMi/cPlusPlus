@@ -16,7 +16,7 @@ public:
         vector<vector<int>> ans;
         sort(nums.begin(),nums.end());
         int i = 0;
-        while (i < nums.size())// 对于每一个数 都去找两个数与之相加
+        while (i < nums.size())// 对于每一个数 都从他的右边去找两个数与之相加
         {
             if (nums[i] > 0)// 因为递增，后面的都大于零，不可能和为零。
                 return ans;

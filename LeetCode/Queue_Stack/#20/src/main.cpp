@@ -28,7 +28,7 @@ public:
                     return false;
             }
         }
-        return st.empty() ? true : false;
+        return st.empty();
     }
 
     // 考虑其他字符
@@ -48,10 +48,7 @@ public:
                 if ((c == ')' && ch != c - 1) || ((c == '}' || c == ']') && ch != c - 2))
                     return false;
             }
-        if (!st.empty())
-            return false;
-        
-        return true;
+        return st.empty();
     }
 };
 

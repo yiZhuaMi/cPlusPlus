@@ -19,12 +19,12 @@ public:
     // x:起点到入口
     // y:入口到相遇点
     // z:相遇点到入口
-    // => 第一次相遇时:
+    // => f比s多走一圈（y+z） 第一次相遇时:
     // f = x + y + z + y
     // s = x + y
     // 由于 f = 2s// 相同时间速度两倍
     // => 2(x + y) = x + y + z + y
-    // => x = z
+    // => x = z ！！！！！
     // => f从起点出发走x步一定会与l再走z步相遇在入口
     ListNode *detectCycle(ListNode *head) {
         ListNode *fast = head, *low = head;
@@ -46,6 +46,29 @@ public:
         return low;
     }
 
+    ListNode *deedsd(ListNode *head)
+    {
+        if (head == nullptr)
+            return nullptr;
+        ListNode *fast = head, *slow = head;
+        while (true)
+        {
+            if (fast->next == nullptr || fast->next->next == nullptr)
+                return nullptr;
+            fast = fast->next->next;
+            slow = slow->next;
+            if (fast == slow)
+                break;
+        }
+        fast = head;
+        while (fast != slow)
+        {
+            fast = fast->next;
+            slow = slow->next;    
+        }
+        return fast;
+    }
+    
     void pringList(ListNode* head)
     {
         ListNode *p = head;

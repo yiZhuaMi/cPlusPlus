@@ -17,6 +17,13 @@ struct TreeNode {
 
 class Solution {
 public:
+    void printList(vector<int> v)
+    {
+        for (auto a : v)
+            printf("%d ",a);
+        printf("\n");
+    }
+
     // 层序遍历建树
     TreeNode* createFromLevelTraverse(vector<int> list)
     {
@@ -62,23 +69,16 @@ public:
         return ans;
     }
 
-    void printList(vector<int> v)
-    {
-        for (auto a : v)
-            printf("%d ",a);
-        printf("\n");
-    }
-
     void dfs(TreeNode* root, int sum)
     {
         if (root == nullptr)
             return;
         path.push_back(root->val);
-        // printList(path);
         sum -= root->val;// 不能排除有负值的情况，所以小于0也继续。
         if (root->left == nullptr && root->right == nullptr && sum == 0)// 叶子结点 找到一组解
         {
             ans.push_back(path);
+            // 不能return 否则path不能回溯
         }
         // 如果是叶子结点会直接return
         dfs(root->left,sum);

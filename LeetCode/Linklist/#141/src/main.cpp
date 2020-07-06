@@ -31,13 +31,14 @@ public:
     bool hasCycle(ListNode *head) {
         if (head == nullptr || head->next == nullptr)
             return false;
-        ListNode *p1 = head, *p2 = head->next;
-        while (p1 != nullptr && p2 != nullptr && p2->next != nullptr)// 会=null则不会有环
+        // 跑得慢的在后，跑得快的在前
+        ListNode *low = head, *fast = head->next;
+        while (low != nullptr && fast != nullptr && fast->next != nullptr)// 会=null则不会有环
         {
-            if (p1 == p2)
+            if (low == fast)
                 return true;
-            p1 = p1->next;
-            p2 = p2->next->next;// 若有环 p1 p2总会重合     
+            low = low->next;
+            fast = fast->next->next;// 若有环 low fast总会重合     
         }
         return false;
     }

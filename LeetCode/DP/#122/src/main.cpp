@@ -14,9 +14,9 @@ public:
         if (prices.size() < 2)
             return 0;
         int total_profit = 0;
-        for (size_t i = 0; i < prices.size()-1; i++)
-            if (prices[i] < prices[i+1])
-                total_profit += prices[i+1] - prices[i];        
+        for (size_t i = 1; i < prices.size(); i++)
+            if (prices[i-1] < prices[i])
+                total_profit += prices[i] - prices[i-1];        
         return total_profit;
     }
 };

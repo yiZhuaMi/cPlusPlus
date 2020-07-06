@@ -44,6 +44,7 @@ public:
         TreeNode *left = lowestCommonAncestor(root->left,p,q);
         TreeNode *right = lowestCommonAncestor(root->right,p,q);
         
+        // 返回非空一定是找到了p／q／祖先，都在一边的话说明返回的p或q就是【最近】祖先。
         if (left && right)// pq左边有一个 右边有一个
             return root;// root即为所求最近公共祖先
         if (right)// 左为空 说明都在右边
@@ -103,5 +104,5 @@ int main()
 {
     Solution s;
     vector<int> v = {6,2,8,1,4,7,9,NULL,NULL,3,5};
-    TreeNode *root = s.lowestCommonAncestor2(s.createFromLevelTraverse(v),new TreeNode(2),new TreeNode(8));
+    TreeNode *root = s.lowestCommonAncestor(s.createFromLevelTraverse(v),new TreeNode(1),new TreeNode(3));
 }

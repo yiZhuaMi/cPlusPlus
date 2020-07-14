@@ -25,7 +25,7 @@ public:
             fast = fast->next->next;
             low = low->next;
         }
-        // low指向后半部分开头（偶数） 或者 中间节点（奇数）（就算加上中间节点以其反转，它会变成的最后一个，不影响下面判等）
+        // low指向后半部分开头（偶数） 或者 中间节点（奇数）（就算加上中间节点一起反转，它会变成的最后一个，不影响下面判等）
         ListNode *cur = low, *pre = nullptr, *next = nullptr;
         while (cur != nullptr)
         {

@@ -49,7 +49,7 @@ using namespace std;
 class MaxQueue {
 private:
     queue<int> q;
-    deque<int> dq;// 辅助双端队列 维护从尾到头的递增序列
+    deque<int> dq;// 需要pop_back 辅助双端队列 维护从尾到头的递增序列
 public:
     MaxQueue() {
 
@@ -61,7 +61,7 @@ public:
     
     void push_back(int value) {
         q.push(value);
-        // dq非空，若队尾比value小，则删除队尾，构造非严格递增的序列
+        // dq非空，若value比队尾大，则删除队尾；构造dq从头到尾（非严格）递减的序列
         while (!dq.empty() && dq.back() < value)
             dq.pop_back();
         dq.push_back(value);

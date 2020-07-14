@@ -22,11 +22,13 @@ public:
         if (headA == nullptr || headB == nullptr)
             return nullptr;
         ListNode *pa = headA, *pb = headB;
-        // 长度不同时 有交点：第一次papb切换链表不会同时==nullptr
-        // 长度相同时 有交点：第一次就会同时指向交点并退出
+        // 有交点 长度不同时：第一次papb切换链表不会同时==nullptr
+        // 有交点 长度相同时：第一次就会同时指向交点并退出
         // 没有交点：不管长度是否相同最后都会指向nullptr
         while (pa != pb)
         {
+            // 移动要让pa／pb 取到空
+            // 如果 pa->next == nullptr 就取不到空 会无限循环
             pa = pa == nullptr ? headB : pa->next;
             pb = pb == nullptr ? headA : pb->next;   
         }

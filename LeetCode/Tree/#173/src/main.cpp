@@ -68,32 +68,8 @@ public:
         }
         printf("\n");
     }
-    // 空间复杂度O(h) 达不到要求
-    // BSTIterator(TreeNode* root) {
-    //     if (root != nullptr)
-    //     {
-    //         BSTIterator(root->left);
-    //         q.push(root->val);
-    //         BSTIterator(root->right);
-    //     }
-    // }
-    
-    // /** @return the next smallest number */
-    // int next() {
-    //     int res = q.front();
-    //     q.pop();
-    //     return res;
-    // }
-    
-    // /** @return whether we have a next smallest number */
-    // bool hasNext() {
-    //     if (q.empty())
-    //         return false;
-    //     else
-    //         return true;
-    // }
 
-    // 方法的本质上是使用自定义的栈来模拟中序遍历
+    // 方法的本质上是使用左臂入栈法来中序遍历二叉搜索树，所以有序。
     // 空间复杂度O(h)
     stack<TreeNode*> s;
     BSTIterator(TreeNode* root) {
@@ -108,7 +84,7 @@ public:
     int next() {
         // 栈顶节点有两种情况：
         // 1.无右结点（所以不会有比该节点的根节点小的节点），直接返回其值。
-        // 2.有右节点，先将其右子树的所有最左节点入栈，然后返回其值。
+        // 2.有右节点，先将其右子树做左臂入栈法，然后返回其值。
         TreeNode* node = s.top();
         int res = node->val;// 保存结果
         s.pop();

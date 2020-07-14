@@ -53,7 +53,7 @@ int main()
 {
     Solution s;
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
-    vector<vector<int>> v = s.threeSum(nums);
+    vector<vector<int>> v = s.threeSum2(nums);
     for (auto v1 : v)
     {
         for (auto v2 : v1)

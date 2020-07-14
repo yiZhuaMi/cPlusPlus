@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Solution {
@@ -36,6 +37,27 @@ public:
         // 还是根据定义，最后一个状态值只是以 nums[len - 1] 结尾的「上升子序列」的长度；
         // 状态数组 dp 的最大值才是最后要输出的值。
         return max;
+    }
+
+    int abc(vector<int>& nums)
+    {
+        if (nums.empty())
+            return 0;
+        vector<int> dp(nums.size());// dp[i]:以i结尾的最长上升子序列
+        dp[0] = 1;
+        int res = 1;
+        for (int i = 1; i < nums.size(); i++)
+        {
+            int max_dp = 0;
+            for (int j = 0; j < i; j++)
+            {
+                if (nums[j] < nums[i] && dp[j] > max_dp)
+                    max_dp = dp[j];
+            }
+            dp[i] = max_dp + 1;
+            res = max(dp[i],res);
+        }
+        return res;
     }
 };
 

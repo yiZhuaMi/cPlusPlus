@@ -55,7 +55,7 @@ public:
 
     TreeNode* pruneTree(TreeNode* root) {
         if (root == nullptr || !existOne(root))
-            return nullptr;
+            return nullptr;// 剪枝
         root->right = pruneTree(root->right);// 若子树包含1，将其送入剪枝
         root->left = pruneTree(root->left);
         return root;

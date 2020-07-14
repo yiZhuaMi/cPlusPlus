@@ -63,12 +63,13 @@ public:
     // 相当于把非0的填入另一个数组，只是这里省去了额外的数组，直接填到nums本身
     void moveZeroes(vector<int>& nums) {
         int fast = 0, low = 0;
-        for (;fast < nums.size(); fast++)
+        while (fast < nums.size())
         {
             if (nums[fast] != 0)
             {
                 nums[low++] = nums[fast];// 把非0填到low
             }
+            fast++;
         }
         // 最后的要填充0
         while (low < nums.size())

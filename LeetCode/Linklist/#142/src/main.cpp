@@ -45,29 +45,6 @@ public:
         }
         return low;
     }
-
-    ListNode *deedsd(ListNode *head)
-    {
-        if (head == nullptr)
-            return nullptr;
-        ListNode *fast = head, *slow = head;
-        while (true)
-        {
-            if (fast->next == nullptr || fast->next->next == nullptr)
-                return nullptr;
-            fast = fast->next->next;
-            slow = slow->next;
-            if (fast == slow)
-                break;
-        }
-        fast = head;
-        while (fast != slow)
-        {
-            fast = fast->next;
-            slow = slow->next;    
-        }
-        return fast;
-    }
     
     void pringList(ListNode* head)
     {

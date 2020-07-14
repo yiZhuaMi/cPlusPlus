@@ -17,15 +17,11 @@ class Solution {
 public:
     // 递归
     TreeNode* mirrorTree(TreeNode* root) {
-        if (root != NULL && (root->left != NULL || root->right != NULL))
-        {
-            TreeNode* tmp;
-            tmp = root->left;
-            root->left = root->right;
-            root->right = tmp;
-            mirrorTree(root->left);
-            mirrorTree(root->right);
-        }
+        if (root == nullptr)
+            return nullptr;
+        TreeNode *tmp = mirrorTree(root->left);// 交换前先递归交换子树
+        root->left = mirrorTree(root->right);
+        root->right = tmp;
         return root;
     }
 

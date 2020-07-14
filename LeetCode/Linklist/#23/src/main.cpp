@@ -30,7 +30,7 @@ struct cmp
 class Solution {
 public:
     // 优先队列
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* mergeKLists2(vector<ListNode*>& lists) {
         priority_queue<ListNode*,vector<ListNode*>,cmp> q;
         // 每个链表的头节点加入优先队列
         for (auto l : lists)
@@ -49,6 +49,46 @@ public:
         }
         return h->next;
     }
+
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (l1 == nullptr || l2 == nullptr)
+            return l1 == nullptr ? l2 : l1;
+        ListNode *head = new ListNode(-1);
+        ListNode *p1 = l1, *p2 = l2, *p = head;
+        while (p1 != nullptr && p2 != nullptr)
+        {
+            if (p1->val <= p2->val)
+            {
+                p->next = p1;
+                p1 = p1->next;
+            }
+            else
+            {
+                p->next = p2;
+                p2 = p2->next;
+            }
+            p = p->next;
+        }
+        if (p1 != nullptr)
+            p->next = p1;
+        else
+            p->next = p2;
+        return head->next;
+    }
+    // 两两合并
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.empty())
+            return nullptr;
+        if (lists.size() == 1)
+            return lists[0];
+        ListNode *res = nullptr;
+        for (int i = 0; i < lists.size(); i++)
+        {
+            res = mergeTwoLists(res,lists[i]);
+        }
+        return res;
+    }
+
 };
 
 int main()

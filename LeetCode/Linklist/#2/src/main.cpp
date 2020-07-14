@@ -17,32 +17,11 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers2(ListNode* l1, ListNode* l2) {
-        size_t res = dfs2(l1,0) + dfs2(l2,0);
-        ListNode* root = new ListNode(res % 10);
-        res /= 10;
-        ListNode* p = root;
-        while (res)
-        {
-            p->next = new ListNode(res % 10);
-            res /= 10;
-            p = p->next;
-        }
-        return root;
-    }
-    // 返回值超出size_t容量
-    size_t dfs2(ListNode* list, int level)
-    {
-        if (list == nullptr)
-            return 0;
-        return list->val * pow(10,level) + dfs2(list->next,++level);
-    }
-
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* head;
         return dfs(l1,l2,head,0);
     }
 
-    ListNode* dfs(ListNode* l1, ListNode* l2, ListNode* p, int addition)
+    ListNode* dfs2(ListNode* l1, ListNode* l2, ListNode* p, int addition)
     {
         if (l1 == nullptr && l2 == nullptr && addition == 0)
             return nullptr;
@@ -52,6 +31,23 @@ public:
         p->next = dfs(l1 == nullptr ? nullptr : l1->next,
                       l2 == nullptr ? nullptr : l2->next,
                       p->next,sum / 10);
+        return p;
+    }
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *p;
+        return dfs(l1,l2,p,0);
+    }
+
+    ListNode* dfs(ListNode* l1, ListNode* l2, ListNode* p, int addition)
+    {
+        if (l1 == nullptr && l2 == nullptr && addition == 0)
+            return nullptr;
+        int n = (l1 == nullptr ? 0 : l1->val) + (l2 == nullptr ? 0 : l2->val) + addition;
+        p = new ListNode(n % 10);
+        p->next = dfs(l1 == nullptr ? nullptr : l1->next,
+                      l2 == nullptr ? nullptr : l2->next,
+                      p->next,n / 10);
         return p;
     }
 };

@@ -8,7 +8,7 @@ using namespace std;
 
 class Solution {
 public:
-    int reverse(int x) {
+    int reverse1(int x) {
         long a = pow(2,31),b = a - 1,r = 0;
         if(x < 0 && abs(long(x)) == a) return 0;
         int ind = 0;
@@ -23,6 +23,16 @@ public:
         if(x < 0) r = -r;
         if(r > b || r < -1 * a) r = 0;
         return r;
+    }
+
+    int reverse(int x) {
+        long y = 0;
+        while (x != 0)
+        {
+            y = x % 10 + y * 10;
+            x /= 10;
+        }
+        return y > INT32_MAX || y < INT32_MIN ? 0 : y;
     }
 };
 

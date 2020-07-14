@@ -12,7 +12,7 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* mergeTwoLists2(ListNode* l1, ListNode* l2) {
 
         ListNode *p1 = l1, *p2 = l2;        
         ListNode *pHead = new ListNode(-1);
@@ -41,6 +41,32 @@ public:
             p = p->next;
         }
         return pHead->next;
+    }
+
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (l1 == nullptr || l2 == nullptr)
+            return l1 == nullptr ? l2 : l1;
+        ListNode *head = new ListNode(-1);
+        ListNode *p1 = l1, *p2 = l2, *p = head;
+        while (p1 != nullptr && p2 != nullptr)
+        {
+            if (p1->val <= p2->val)
+            {
+                p->next = p1;
+                p1 = p1->next;
+            }
+            else
+            {
+                p->next = p2;
+                p2 = p2->next;
+            }
+            p = p->next;
+        }
+        if (p1 != nullptr)
+            p->next = p1;
+        else
+            p->next = p2;
+        return head->next;
     }
 };
 

@@ -17,17 +17,7 @@ public:
     int maxDepth(TreeNode* root) {
         if (root == NULL)
             return 0;
-        return max(maxDepth(root->left)+1,maxDepth(root->right)+1);
-    }
-
-    TreeNode* create(vector<int> list, int ind)
-    {
-        if (ind >= list.size() || list[ind] == 0)
-            return NULL;
-        TreeNode *n = new TreeNode(list[ind]);// v中的NULL转换为0 这里会变成叶子结点0
-        n->left = create(list,2*ind+1);
-        n->right = create(list,2*ind+2);
-        return n;
+        return 1 + max(maxDepth(root->left),maxDepth(root->right));
     }
 };
 
@@ -36,5 +26,4 @@ int main()
     Solution s;
     vector<int> v = {3,9,20,NULL,NULL};
     // vector<int> v = {};
-    printf("%d\n",s.maxDepth(s.create(v,0)));
 }

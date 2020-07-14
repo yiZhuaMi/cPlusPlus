@@ -29,7 +29,7 @@ public:
         vector<vector<int>> g(numCourses);
         // 统计上过的课
         int count = 0;
-        // 通过遍历先决条件表，计算出每门课的初始入度
+        // 通过遍历先决条件表，计算出每门课的初始入度，并初始化图
         for (auto c : prerequisites)
         {
             m[c[0]]++;

@@ -33,25 +33,28 @@ public:
         }
     }
 
-    auto lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) -> TreeNode*
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
     {
         // 普通二叉树就一定要递归到p/q节点或者NULL 来判断在左还是右
-        if (root == NULL)// 最后递归到叶子结点还没发现pq
-            return NULL;
+        if (root == nullptr)// 最后递归到叶子结点还没发现pq
+            return nullptr;
+        // 找到了p／q直接返回
         if (root == p || root == q)
             return root;
-        
+        // 否则看是否在左右子树中
         TreeNode *left = lowestCommonAncestor(root->left,p,q);
         TreeNode *right = lowestCommonAncestor(root->right,p,q);
         
-        // 返回非空一定是找到了p／q／祖先，都在一边的话说明返回的p或q就是【最近】祖先。
+        // 此时左右子树检查结束
+        // left/right 只可能为p/q/nullptr
+        // 返回非空一定是找到了p／q，都在一边的话说明返回的p或q就是【最近】祖先。
         if (left && right)// pq左边有一个 右边有一个
             return root;// root即为所求最近公共祖先
-        if (right)// 左为空 说明都在右边
-            return right;// 返回右子树
+        if (right)// 左为空
+            return right;// 返回right(q或p)
         if (left)
             return left;
-        return NULL;
+        return nullptr;
     }
 
     TreeNode* createTree(vector<int> list, int ind)

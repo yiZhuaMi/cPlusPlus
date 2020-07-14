@@ -29,7 +29,7 @@ public:
             {
                 right = mid;
             }
-            else if (numbers[mid] == numbers[right])// 有相同的两个值 则至少也可以排除right
+            else if (numbers[mid] == numbers[right])// 有相同的两个值 则至少也可以排除right (不能直接right=mid)
             {
                 right--;
             }

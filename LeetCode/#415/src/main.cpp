@@ -36,10 +36,33 @@ public:
         reverse(res.begin(),res.end());
         return res;
     }
+
+    string addStrings2(string num1, string num2) {
+        string res;
+        reverse(num1.begin(),num1.end());
+        reverse(num2.begin(),num2.end());
+        int add = 0, ind = 0;
+        while (ind < num1.size() || ind < num2.size())
+        {
+            int a = ind < num1.size() ? num1[ind] - '0' : 0;
+            int b = ind < num2.size() ? num2[ind] - '0' : 0;
+            
+            int n = a + b + add;
+            
+            res.push_back(n % 10 + '0');
+            add = n / 10;
+
+            ind++;
+        }
+        if (add != 0)
+            res.push_back(add + '0');
+        
+        return string(res.rbegin(),res.rend());
+    }
 };
 
 int main()
 {
     Solution s;
-    s.addStrings("9","99");
+    printf("1 %s\n",s.addStrings2("9","98").c_str());
 }

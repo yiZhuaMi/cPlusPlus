@@ -95,7 +95,7 @@ public:
             int color = s.top().first;
             TreeNode *n = s.top().second;
             s.pop();
-            if (n == NULL)
+            if (n == nullptr)
                 continue;
             if (color == white)
             {
@@ -118,5 +118,5 @@ int main()
     // vector<int> v = {1,NULL,2,NULL,NULL,3};
     vector<int> v = {1,NULL,2,3};
     TreeNode *root = s.createFromLevelTraverse(v);
-    v = s.postorderTraversal(root);
+    v = s.postorderTraversal3(root);
 }

@@ -15,6 +15,7 @@ using namespace std;
 
 class Solution {
 public:
+    // 从左往右 滑动窗口
     int minSubArrayLen(int s, vector<int>& nums) {
         if (nums.empty())
             return 0;
@@ -28,6 +29,24 @@ public:
             {
                 // if (sum == s) 不能只在==时更新
                     res = min(res, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+            right++;
+        }
+        return res == INT32_MAX ? 0 : res;
+    }
+
+    int minSubArrayLen2(int s, vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+        int left = 0, right = 0, sum = 0, res = INT32_MAX;
+        while (right < nums.size())
+        {
+            sum += nums[right];
+            while (sum >= s)
+            {
+                res = min(res,right-left+1);
                 sum -= nums[left];
                 left++;
             }

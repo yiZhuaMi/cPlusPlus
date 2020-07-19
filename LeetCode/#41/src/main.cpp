@@ -22,9 +22,9 @@ public:
 
     int firstMissingPositive(vector<int> &nums)
     {
-        for (int i = 0; i < nums.size();)
+        for (int i = 0; i < nums.size();)// !!!
         {
-            // 确保nums[nums[i]-1]不会越界
+            // 确保nums[nums[i]-1]不会越界 是nums[i]作为下标而不是i
             if (nums[i] >= 1 && nums[i] < nums.size() + 1 &&
             // 确保nums[i]要去的下标nums[i]-1处对应的数不正确(没有被另一个自己占用)
                 nums[nums[i] - 1] != nums[i])
@@ -39,7 +39,7 @@ public:
             if (nums[i] != i + 1)
                 return i + 1; 
 
-        return nums.size() + 1;
+        return nums.size() + 1;// !!!!!!!!!!!
     }
 };
 

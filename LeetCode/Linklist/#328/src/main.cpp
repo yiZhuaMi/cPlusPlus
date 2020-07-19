@@ -40,7 +40,7 @@ public:
             if (flag++ % 2 == 1)
             {
                 // 偶数时，偶数节点被删除，pre不用移动
-                pre = cur;
+                pre = cur;// !!!!!!
                 // 最后一个节点是奇数时（此时p2->next指向最后一个奇数节点）
                 if (cur->next == nullptr)
                     p2->next = nullptr;

@@ -36,35 +36,6 @@ public:
             }
         }
     }
-
-    vector<vector<int>> res;
-    vector<int> one_ans;
-
-    vector<vector<int>> permute2(vector<int>& nums) {
-        vector<bool> used(nums.size(),false);
-        dfs(nums,used);
-        return res;
-    }
-
-    void dfs(vector<int>& nums, vector<bool>& used)
-    {
-        if (one_ans.size() == nums.size())
-        {
-            res.push_back(one_ans);
-            return;
-        }
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (used[i] == false)
-            {
-                one_ans.push_back(nums[i]);
-                used[i] = true;
-                dfs(nums,used);
-                used[i] = false;
-                one_ans.pop_back();
-            }
-        }
-    }
 };
 
 int main()

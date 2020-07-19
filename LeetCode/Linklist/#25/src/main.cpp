@@ -38,7 +38,7 @@ public:
             return head;
         // 此时p指向要反转位置的后一个 第二段的开头
         ListNode *pre = nullptr, *cur = head, *next = nullptr;
-        while (cur != p)
+        while (cur != p)// !!!!!!
         {
             next = cur->next;
             cur->next = pre;
@@ -46,6 +46,29 @@ public:
             cur = next;
         }
         head->next = reverseKGroup(p,k);
+        return pre;
+    }
+
+    ListNode *reverseKGroup2(ListNode *head, int k)
+    {
+        ListNode *p = head;
+        int count = 0;
+        while (count < k && p != nullptr)
+        {
+            p = p->next;
+            count++;
+        }
+        if (count < k)
+            return head;
+        ListNode *pre = nullptr, *cur = head, *next= nullptr;
+        while (cur != p)
+        {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
+        }
+        head->next = reverseKGroup2(p,k);
         return pre;
     }
 };

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(test344)
+project(test_74)
 
 add_compile_options(-std=c++11)
 
@@ -7,4 +7,4 @@ set(SRC
     ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
-add_executable(test344 src/main.cpp)
+add_executable(test_74 src/main.cpp)

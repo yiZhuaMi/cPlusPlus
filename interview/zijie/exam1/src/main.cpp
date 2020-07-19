@@ -11,7 +11,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class LRUCache {
+class Solution {
 public:
     int maxDepth(TreeNode* root) {
         if (root == nullptr)

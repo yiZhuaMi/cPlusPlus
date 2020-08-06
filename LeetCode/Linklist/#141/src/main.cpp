@@ -26,6 +26,18 @@ public:
         return false;
     }
     
+    bool hasCycle3(ListNode *head) {
+        if (head == nullptr || head->next == nullptr)
+            return false;
+        ListNode *low = head, *fast = head->next;
+        while(low != fast && fast != nullptr && fast->next != nullptr)
+        {
+            low = low->next;
+            fast = fast->next->next;
+        }
+        return low == fast;
+    }
+
     // 空间复杂度:O(1)
     // 把慢跑者视作参考系，这样来思考，慢跑者站着不动，快跑者速度为1，就会发现一定会相遇
     bool hasCycle(ListNode *head) {

@@ -6,39 +6,6 @@ using namespace std;
 
 class Solution {
 public:
-    // int removeDuplicates(vector<int>& nums) {
-        
-    //     if (nums.size() <= 1)
-    //         return nums.size();
-    //     int pre_num = nums[0];
-    //     int len = nums.size();
-    //     for (size_t i = 1; i < nums.size(); i++)
-    //     {
-    //         if (nums[i] == pre_num)
-    //             nums[i] = nums[0]-1;
-    //         else
-    //             pre_num = nums[i];
-    //     }
-    //     for (size_t i = 0; i < nums.size(); i++)
-    //     {
-    //         if (nums[i] == nums[0]-1 || nums[i] == nums[0]-2)
-    //         {
-    //             if (nums[i] == nums[0]-1)
-    //                 len--;   
-    //             for (size_t j = i+1; j < nums.size(); j++)
-    //             {
-    //                 if (nums[j] != nums[0]-1 && nums[j] != nums[0]-2)
-    //                 {
-    //                     nums[i] = nums[j];
-    //                     nums[j] = nums[0]-2;
-    //                     break;    
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return len;
-    // }
-
     // 双指针法
     // 数组完成排序后 我们可以放置两个指针i和j 其中j是慢指针 而i是快指针 只要nums[i]=nums[j] 我们就增加i以跳过重复项
     // 当我们遇到 nums[j]!=nums[j] 跳过重复项的运行已经结束，因此我们必须把它nums[i]的值复制到nums[j+1] 然后递增j
@@ -55,7 +22,8 @@ public:
         int j = 0;
         for (size_t i = 0; i < nums.size(); i++)
             if (nums[i] != nums[j])
-                nums[++j] = nums[i];            
+                nums[++j] = nums[i];     
+        // j是下标 返回的是长度
         return j+1;
     }
 };

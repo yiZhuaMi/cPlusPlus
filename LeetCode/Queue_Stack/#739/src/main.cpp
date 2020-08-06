@@ -12,7 +12,7 @@ using namespace std;
 
 class Solution {
 public:
-    // 单调栈 栈底 <= 栈顶
+    // 单调栈 保存下标 栈底 >= 栈顶 
     vector<int> dailyTemperatures(vector<int>& T) {
         stack<int> s;
         vector<int> res(T.size(),0);

@@ -16,38 +16,20 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* addTwoNumbers2(ListNode* l1, ListNode* l2) {
-        ListNode* head;
-        return dfs(l1,l2,head,0);
-    }
-
-    ListNode* dfs2(ListNode* l1, ListNode* l2, ListNode* p, int addition)
-    {
-        if (l1 == nullptr && l2 == nullptr && addition == 0)
-            return nullptr;
-        int sum = (l1 == nullptr ? 0 : l1->val) + (l2 == nullptr ? 0 : l2->val) + addition;
-        
-        p = new ListNode(sum % 10);
-        p->next = dfs(l1 == nullptr ? nullptr : l1->next,
-                      l2 == nullptr ? nullptr : l2->next,
-                      p->next,sum / 10);
-        return p;
-    }
-
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *p;
-        return dfs(l1,l2,p,0);
+        return dfs(l1,l2,0);
     }
 
-    ListNode* dfs(ListNode* l1, ListNode* l2, ListNode* p, int addition)
+    ListNode* dfs(ListNode* l1, ListNode* l2, int addition)
     {
         if (l1 == nullptr && l2 == nullptr && addition == 0)
             return nullptr;
+                // 括号！！！ 括号！！！ 括号！！！
         int n = (l1 == nullptr ? 0 : l1->val) + (l2 == nullptr ? 0 : l2->val) + addition;
-        p = new ListNode(n % 10);
+        ListNode* p = new ListNode(n % 10);
         p->next = dfs(l1 == nullptr ? nullptr : l1->next,
                       l2 == nullptr ? nullptr : l2->next,
-                      p->next,n / 10);
+                      n / 10);
         return p;
     }
 };

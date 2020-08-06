@@ -14,40 +14,35 @@ public:
             return nums.empty() ? 0 : nums[0];
         vector<int> dp(nums.size(),0);// dp[i]:以nums[i]结尾的和最大的连续子序列的和
         dp[0] = nums[0];
-        int max = dp[0];
+        int res_max = dp[0];
         for (size_t i = 1; i < nums.size(); i++)
         {
             // 转换方程 
             dp[i] = dp[i-1] < 0 ? nums[i] : dp[i-1]+nums[i];
-            if (dp[i] > max)
-                max = dp[i];
+            res_max = max(res_max,dp[i]);
         }
-        return max;
+        return res_max;
     }
 
-    // 时间复杂度：O(n) 空间复杂度：O(1)
-    int maxSubArray(vector<int>& nums) {
-        if (nums.size() < 2)
-            return nums.empty() ? 0 : nums[0];
-        int sum = 0;
-        int max = nums[0];
-        for (size_t i = 1; i < nums.size(); i++)
+    int maxSubArray(vector<int>& nums)
+    {   
+        if (nums.empty())
+            return 0;
+        int sum = nums[0];
+        int res = nums[0];
+        for (int i = 1; i < nums.size(); i++)
         {
-            if (sum > 0)// 和>0 我就参和一下
-                sum += nums[i];
-            else
-                sum = nums[i];// 否则自己另起炉灶
-
-            if (sum > max)
-                max = sum;
+            sum = max(sum+nums[i],nums[i]);
+            res = max(res,sum);
         }
-        return max;
+        return res;
     }
 };
 
 int main()
 {
-    vector<int> v = {-2,1,-3,4,-1,2,1,-5,4};
+    // vector<int> v = {-2,1,-3,4,-1,2,1,-5,4};
+    vector<int> v = {1,1,-1,1,1};
     Solution s;
     printf("%d\n",s.maxSubArray(v));
 }

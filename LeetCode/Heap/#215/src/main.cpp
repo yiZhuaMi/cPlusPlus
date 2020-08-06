@@ -80,6 +80,38 @@ public:
         sort(nums.begin(),nums.end());
         return nums[nums.size()-k];
     }
+
+    int find_k_elem(vector<int>& v, int k, int l, int r)
+    {
+        if (v.empty())
+            return -1;
+        int left = 0, right = v.size()-1;
+        int key = left;
+        while (left < right)
+        {
+            while (left < right && v[right] <= v[key])
+                right--;
+            while (left < right && v[left] >= v[key])
+                left++;        
+            swap(v[left],v[right]);
+        }
+        swap(v[key],v[left]);
+        swap(key,left);
+
+        if (key > k)
+        {
+            return find_k_elem(v,k,l,key-1);
+        }
+        else if (key < k)
+        {
+            return find_k_elem(v,k,key+1,r);
+        }
+        // key == k
+        else
+        {
+            return v[key];
+        }
+    }
 };
 
 int main()

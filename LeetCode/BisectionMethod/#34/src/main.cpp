@@ -35,7 +35,7 @@ public:
         // 退出条件是 left == right + 1
         // 但有两种失败情况：
         // 1.left没有越界，但是nums[left] != target
-        // 2.left越界
+        // 2.left越界(范围只会缩小，所以left只会变大)
         if (left >= nums.size() || nums[left] != target)
             return {-1,-1};
         // 否则此时left就是左边界
@@ -54,6 +54,7 @@ public:
             else
                 left = mid + 1;// !!!!!!!!!!!!!!!!!
         }
+        // (范围只会缩小，所以right只会变小)
         if (right < 0 || nums[right] != target)
             return {-1,-1};
         end = right;

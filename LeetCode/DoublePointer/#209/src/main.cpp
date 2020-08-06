@@ -25,10 +25,9 @@ public:
         {
             sum += nums[right];
             // right先扩张到 >=s 就收缩left
-            while (sum >= s)
+            while (sum >= s)// 注意：while!!!!!!!!!!!!
             {
-                // if (sum == s) 不能只在==时更新
-                    res = min(res, right - left + 1);
+                res = min(res, right - left + 1);
                 sum -= nums[left];
                 left++;
             }

@@ -41,22 +41,6 @@ public:
         }
         return res;
     }
-
-    int subarraySum(vector<int>& nums, int k) {
-        int res = 0, prefix = 0;
-        unordered_map<int,int> m;
-        m[0] = 1;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            prefix += nums[i];
-            if (m.find(prefix - k) != m.end())
-            {
-                res += m[prefix-k];
-            }
-            m[prefix]++;
-        }
-        return res;
-    }
 };
 
 int main()

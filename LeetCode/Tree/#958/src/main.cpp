@@ -47,7 +47,7 @@ public:
                     flag = 1;
                     continue;
                 }
-                // 这一层左边有null 但是我却不为null
+                // 我之前有null 但是我却不为null
                 else if (flag)
                     return false;   
 

@@ -50,7 +50,9 @@ public:
         }
         return root;
     }
-    // 层序遍历 存一半 检查另一半
+
+    // 错误！！！！！！！
+    // 层序遍历 存一半 检查另一半 
     bool isSymmetric2(TreeNode* root) {
         if (root == nullptr)
             return true;
@@ -72,6 +74,7 @@ public:
                     v.push_back(node->val);
                 else if (node->val != v[len-i-1])// 验证后一半                 
                     return false;
+                    // 这个案例通不过！！！！！！！
                     //  1
                     // / \
                     // 2  2
@@ -134,7 +137,9 @@ public:
             return true;
         if (left == nullptr || right == nullptr || left->val != right->val)
             return false;
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return mirro(left->left,right->right) && mirro(right->left,left->right);// !!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
 };

@@ -45,9 +45,9 @@ public:
                 q.pop();  
                 level.push_back(node->val);
 
-                if (node->left == nullptr)
+                if (node->left != nullptr)
                     q.push(node->left);
-                if (node->right == nullptr)
+                if (node->right != nullptr)
                     q.push(node->right);      
             }            
             res.push_back(level);

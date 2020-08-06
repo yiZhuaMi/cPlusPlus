@@ -27,7 +27,7 @@ public:
         // 没有交点：不管长度是否相同最后都会指向nullptr
         while (pa != pb)
         {
-            // 移动要让pa／pb 取到空
+            // 一定要让pa／pb 取到空
             // 如果 pa->next == nullptr 就取不到空 会无限循环
             pa = pa == nullptr ? headB : pa->next;
             pb = pb == nullptr ? headA : pb->next;   
@@ -39,5 +39,4 @@ public:
 int main()
 {
     Solution s;
-    vector<int> v = {1,2,3};
 }

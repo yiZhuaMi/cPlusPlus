@@ -60,6 +60,7 @@ public:
 
     // 找到(乱序中)最小的交换到有序最后 乱序-1
     // 最前是有序的
+    // 这里找到的min_ind是最右的，若左边还有与min_ind相等的，就会破坏稳定性。
     void SelectionSort(int *a, int len)
     {
         clock_t time_start = clock();

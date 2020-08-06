@@ -38,7 +38,7 @@ public:
     }
 
     // 滑动窗口 类似上面的队列 用双指针代替队列
-    int lengthOfLongestSubstring(string s) {
+    int lengthOfLongestSubstring3(string s) {
         if (s.empty())
             return 0;
         int left = 0, right = 0, max_len = 0;
@@ -64,6 +64,29 @@ public:
                 max_len = right - left;
         }
         return max_len;
+    }
+
+    int lengthOfLongestSubstring(string s) {
+        set<int> se;
+        int max_res = 0;
+        int left = 0, right = 0;
+        while (right < s.length())
+        {
+            // right是要插入的
+            if (se.find(s[right]) != se.end())
+            {
+                while (s[left] != s[right])
+                {
+                    se.erase(s[left++]);
+                }
+                se.erase(s[left++]);
+                // 删掉了与right重复的
+            }
+            se.insert(s[right]);
+            max_res = max(max_res,right-left+1);
+            right++;
+        }
+        return max_res;
     }
 };
 

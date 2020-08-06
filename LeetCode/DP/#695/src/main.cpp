@@ -54,9 +54,6 @@ public:
             return 0;
         if (grid[i][j] == 0)
             return 0;
-        // printf("=========\n");
-        // print_island(grid);
-        // printf("dfs %d %d\n",i,j);
         // 原地记录已经访问的点
         grid[i][j] = 0;
         // dfs遍历该点的上下左右四个方向

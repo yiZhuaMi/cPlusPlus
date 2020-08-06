@@ -22,6 +22,7 @@ public:
     int nthUglyNumber(int n) {
         vector<int> ugly_nums(1);
         ugly_nums[0] = 1;// 第一个丑数
+        // 指向该数组的最后一个丑数，1是他们公共的第一个丑数。
         int ind_2 = 0,ind_3 = 0,ind_5 = 0;
         while (--n)// 找到第n个丑数
         {

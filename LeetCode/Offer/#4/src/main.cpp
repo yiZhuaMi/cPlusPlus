@@ -24,6 +24,30 @@ public:
         }
         return false;
     }
+
+    // 二维 双指针
+    bool findNumberIn2DArray2(vector<vector<int>>& matrix, int target) {
+        if (matrix.empty())
+            return false;
+        // 从矩阵的右上角开始
+        int row = 0, col = matrix[0].size()-1;
+        while (row < matrix.size() && col >= 0)
+        {
+            if (matrix[row][col] > target)
+            {
+                col--;
+            }
+            else if (matrix[row][col] < target)
+            {
+                row++;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
 int main()

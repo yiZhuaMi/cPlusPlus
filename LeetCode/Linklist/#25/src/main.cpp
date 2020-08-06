@@ -51,16 +51,16 @@ public:
 
     ListNode *reverseKGroup2(ListNode *head, int k)
     {
-        ListNode *p = head;
+        ListNode* p = head;
         int count = 0;
-        while (count < k && p != nullptr)
+        while (p != nullptr && count < k)
         {
             p = p->next;
             count++;
         }
         if (count < k)
             return head;
-        ListNode *pre = nullptr, *cur = head, *next= nullptr;
+        ListNode *pre = nullptr, *cur = head, *next = nullptr;
         while (cur != p)
         {
             next = cur->next;

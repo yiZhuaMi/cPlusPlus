@@ -25,20 +25,23 @@ public:
         while (left < right)
         {
             int mid = left + (right - left) / 2;// mid >= left
-            if (numbers[mid] < numbers[right])// 说明最小值在[left,mid]之间
+            // 说明最小值在[left,mid]之间
+            if (numbers[mid] < numbers[right])
             {
                 right = mid;
             }
-            else if (numbers[mid] == numbers[right])// 有相同的两个值 则至少也可以排除right (不能直接right=mid)
+            // 有相同的两个值 则至少也可以排除right (不能直接right=mid!!!!!!因为{3,3,1,3})
+            else if (numbers[mid] == numbers[right])
             {
                 right--;
             }
-            else// numbers[mid] > numbers[right] 说明最小值在[mid+1,right]之间
+            // numbers[mid] > numbers[right] 说明最小值在[mid+1,right]之间
+            else
             {
                 left = mid + 1;
             }   
         }
-        return numbers[left];        
+        return numbers[right];        
     }
 };
 

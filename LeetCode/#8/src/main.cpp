@@ -57,10 +57,34 @@ public:
         }
         return sign * res;
     }
+
+    int myAtoi2(string str) {
+        int ind = 0, res = 0;
+        // 跳过所有空格
+        while (ind < str.length() && str[ind] == ' ')
+            ind++;
+        // 没有非空字符 || 第一个非空字符 既不是数字也不是+-号
+        if (ind >= str.length() || (str[ind] != '+' && str[ind] != '-' && str[ind] < '0' && str[ind] > '9'))
+            return 0;
+        int sign = 1;
+        if (str[ind] == '-' || str[ind] == '+')
+            sign = str[ind++] == '-' ? -1 : 1;
+        while (str[ind] >= '0' && str[ind] <= '9')
+        {
+            int cur = str[ind] - '0';
+            if (sign > 0 && (res > INT32_MAX / 10 || (res == INT32_MAX / 10 && cur >= 7)))
+                return INT32_MAX;
+            if (sign < 0 && (res > INT32_MIN / -10 || (res == INT32_MIN / -10 && cur >= 8)))
+                return INT32_MIN;
+            res = res * 10 + cur;
+            ind++;
+        }
+        return res * sign;
+    }
 };
 
 int main()
 {
     Solution s;
-    printf("%d\n",s.myAtoi("0-1"));
+    printf("%d\n",s.myAtoi2("-2147483647"));
 }

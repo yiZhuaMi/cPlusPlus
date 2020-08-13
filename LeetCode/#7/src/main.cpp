@@ -25,7 +25,7 @@ public:
         return r;
     }
 
-    int reverse(int x) {
+    int reverse3(int x) {
         long y = 0;
         while (x != 0)
         {
@@ -33,6 +33,24 @@ public:
             x /= 10;
         }
         return y > INT32_MAX || y < INT32_MIN ? 0 : y;
+    }
+
+    int reverse(int x) {
+        if (x == INT32_MIN)
+            return 0;
+        int sign = x > 0 ? 1 : -1;
+        int z = x < 0 ? -x : x;
+        int y = 0;
+        while (z)
+        {
+            if (sign > 0 && (y > INT32_MAX / 10 || (y == INT32_MAX / 10 && z % 10 >= 7)))
+                return 0;
+            if (sign < 0 && (y > INT32_MIN / -10 || (y == INT32_MIN / -10 && z % 10 >= 8)))
+                return 0;
+            y = y * 10 + z % 10;
+            z /= 10;
+        }
+        return sign * y;
     }
 };
 

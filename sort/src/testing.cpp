@@ -61,19 +61,24 @@ void quickSort(int *a, int left, int right)
 
 void merge(int *a, int left, int q, int right)
 {
-    int l = left, r = q + 1;
-    int *temp = new int[right-left+1];
-    int ind = 0;
+    int l = left, r = q + 1, ind = 0;
+    int *temp = new int[right - left + 1];
     while (l <= q && r <= right)
     {
         temp[ind++] = a[l] <= a[r] ? a[l++] : a[r++];
     }
     while (l <= q)
+    {
         temp[ind++] = a[l++];
+    }
     while (r <= right)
+    {
         temp[ind++] = a[r++];
+    }
     for (int i = left; i <= right; i++)
-        a[i] = temp[i-left];
+    {
+        a[i] = temp[i - left];
+    }
     delete[] temp;
 }
 
@@ -81,7 +86,7 @@ void mergeSort(int *a, int left, int right)
 {
     if (left >= right)
         return;
-    int q  = left + (right - left) / 2;
+    int q = left + (right - left) / 2;
     mergeSort(a,left,q);
     mergeSort(a,q+1,right);
     merge(a,left,q,right);

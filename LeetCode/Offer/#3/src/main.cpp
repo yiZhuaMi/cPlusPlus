@@ -35,6 +35,7 @@ public:
                 s.insert(n);
         return -1;        
     }
+
 };
 
 int main()

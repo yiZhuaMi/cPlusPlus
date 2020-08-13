@@ -118,5 +118,5 @@ int main()
     // vector<int> v = {1,NULL,2,NULL,NULL,3};
     vector<int> v = {1,NULL,2,3};
     TreeNode *root = s.createFromLevelTraverse(v);
-    v = s.postorderTraversal3(root);
+    v = s.postorderTraversal(root);
 }

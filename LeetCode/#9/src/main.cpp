@@ -22,7 +22,7 @@ public:
             return true;
         else
         {
-            long y = 0, z = long(x);// y就是将x位数反过来的数
+            long y = 0, z = long(x);// y就是将x位数反过来的数 long!!!!!!!!!!!!!!!!
             while (x > 0)
             {
                 // x%10得到x最右一位，+y*10使得原来靠右的现在靠左

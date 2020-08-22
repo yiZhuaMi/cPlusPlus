@@ -43,6 +43,7 @@ public:
             {
                 TreeNode* node = q.front();
                 q.pop();  
+                // 不能在这里先continue，因为会导致只有空节点在q中
                 level.push_back(node->val);
 
                 if (node->left != nullptr)

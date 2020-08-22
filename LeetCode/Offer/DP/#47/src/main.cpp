@@ -9,42 +9,24 @@ using namespace std;
 
 class Solution {
 public:
-    // dp[i] [j] = max(dp[i-1][j]，dp[i][j-1]) + arr[i][j];
+
     int maxValue(vector<vector<int>>& grid) {
-
-        vector<vector<int>> dp;//dp[i][j]:走到该位置上最大的价值
-
-        for (size_t i = 0; i < grid.size(); i++)
+        vector<vector<int>> dp = grid;
+        for (int i = 0; i < grid.size(); i++)
         {
-            vector<int> d(grid[0].size(),0);
-            dp.push_back(d);
-        }
-        int max = grid[0][0];
-        for (size_t i = 0; i < grid.size(); i++)
-        {
-            for (size_t j = 0; j < grid[0].size(); j++)
+            for (int j = 0; j < grid[i].size(); j++)
             {
                 if (i + j == 0)
-                {
-                    dp[i][j] = grid[0][0];
-                }
+                    dp[i][j] = grid[i][j];
                 else if (i == 0)
-                {
-                    dp[i][j] = dp[i][j-1] + grid[i][j];
-                }
+                    dp[i][j] = grid[i][j] + dp[i][j-1];
                 else if (j == 0)
-                {
-                    dp[i][j] = dp[i-1][j] + grid[i][j];
-                }
+                    dp[i][j] = grid[i][j] + dp[i-1][j];
                 else
-                {
-                    dp[i][j] = (dp[i][j-1] > dp[i-1][j] ? dp[i][j-1] : dp[i-1][j]) + grid[i][j];
-                }
-                if (dp[i][j] > max)
-                    max = dp[i][j];            
+                    dp[i][j] = grid[i][j] + max(dp[i][j-1],dp[i-1][j]);
             }
         }
-        return max;
+        return dp.back().back();
     }
 };
 

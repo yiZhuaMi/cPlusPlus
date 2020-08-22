@@ -27,11 +27,13 @@ public:
     // => x = z ！！！！！
     // => f从起点出发走x步一定会与l再走z步相遇在入口
     ListNode *detectCycle(ListNode *head) {
+        // 复习：fast = head！！！若是=head->next导致相遇点不同！！！！
         ListNode *fast = head, *low = head;
         while (true)
         {
             if (fast == nullptr || fast->next == nullptr)// 没有环
                 return nullptr;
+            // 先走再判等
             fast = fast->next->next;
             low = low->next;
             if (fast == low)// 找到了环上的相遇点
@@ -44,6 +46,35 @@ public:
             low = low->next;
         }
         return low;
+    }
+
+    ListNode *detectCycle2(ListNode *head) {
+        if (head == nullptr || head->next == nullptr)
+            return nullptr;
+        ListNode *low = head, *fast = head;
+        while (1)
+        {
+            if (fast == nullptr || fast->next == nullptr)
+                return nullptr;
+            low = low->next;
+            fast = fast->next->next;
+            if (low == fast)
+                break;
+        }
+        // while (low != fast && fast != nullptr && fast->next != nullptr)
+        // {
+        //     low = low->next;
+        //     fast = fast->next->next;
+        // }
+        // if (low != fast)
+        //     return nullptr;
+        fast = head;
+        while (fast != low)
+        {
+            fast = fast->next;
+            low = low->next;
+        }
+        return fast;
     }
     
     void pringList(ListNode* head)
@@ -68,5 +99,5 @@ int main()
     n2->next = n3;
     n3->next = n4;
     n4->next = n2;
-    printf("%d",s.detectCycle(n1)->val);
+    printf("%d",s.detectCycle2(n1)->val);
 }

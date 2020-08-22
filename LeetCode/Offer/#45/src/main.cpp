@@ -15,7 +15,7 @@ public:
         // 所有的数字都转字符串
         for (auto n : nums)
             n_str.push_back(to_string(n));
-        // lambda表达式
+        // 复习：lambda表达式 '<'升序->小的在前->先被添加到res->在res的左边（高位）
         sort(n_str.begin(),n_str.end(),[] (const string& a, const string& b) -> bool {return a + b < b + a;});
         for (auto c : n_str)
             res += c;

@@ -21,11 +21,33 @@ public:
             
         return str;
     }
+
+    // 待解决
+    string replaceSpace2(string s) {
+        int count = s.length();
+        for (auto ite = s.begin(); count-- > 0; ite++)
+        {
+            if (*ite ==' ')
+            {
+                printf("ite=[%c]\n",*ite);
+                s.erase(ite);
+                printf("ite=[%c]\n",*ite);
+                s.insert(ite,'0');
+                printf("ite=[%c]\n",*ite);
+                s.insert(ite,'2');
+                printf("ite=[%c]\n",*ite);
+                s.insert(ite,'%');
+                printf("ite=[%c]\n",*ite);
+                ite ++;
+            }
+        }    
+        return s;
+    }
 };
 
 int main()
 {   
     string str = "We are happy.";
     Solution s;
-    printf("%s\n",s.replaceSpace(str).c_str());
+    printf("%s\n",s.replaceSpace2(str).c_str());
 }

@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray1(vector<int>& nums) {
         vector<int> dp;// dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和
         dp.push_back(nums[0]);
         int max = dp[0];
@@ -29,7 +29,7 @@ public:
         return max;
     }
 
-    int maxSubArrayTest(vector<int>& nums) {
+    int maxSubArray2(vector<int>& nums) {
         if (nums.empty())
             return 0;
         vector<int> dp(nums.size());// dp[i]:以nums[i]结尾的连续子数组的最大和
@@ -41,6 +41,19 @@ public:
             res = max(res,dp[i]);
         }
         return res;
+    }
+
+    int maxSubArray(vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+        int res_max = nums[0];
+        int sum = nums[0];// 不需要dp数组，只要前一个位置的最大和
+        for (int i = 1; i < nums.size(); i++)
+        {
+            sum = max(sum + nums[i], nums[i]);
+            res_max = max(res_max,sum);
+        }
+        return res_max;
     }
 };
 

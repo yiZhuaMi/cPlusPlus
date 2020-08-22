@@ -51,17 +51,17 @@ public:
     }
 
     // 下面的代码当t2是t1的一部分但不是t1的子树这种情况（比如t1=[2,1,3]，t2=[2]）会返回false
-    bool isSubStructure2(TreeNode* A, TreeNode* B) {
-        if (A == nullptr && B == nullptr)
-            return true;
-        if (A == nullptr || B == nullptr)
-            return false;
-        if (A->val == B->val)
-            return isSubStructure2(A->left,B->left) && isSubStructure2(A->right,B->right);
+    // bool isSubStructure2(TreeNode* A, TreeNode* B) {
+    //     if (A == nullptr && B == nullptr)
+    //         return true;
+    //     if (A == nullptr || B == nullptr)
+    //         return false;
+    //     if (A->val == B->val)
+    //         return isSubStructure2(A->left,B->left) && isSubStructure2(A->right,B->right);
         
-        // 如果以上情况都不是的话
-        return isSubStructure2(A->left,B) || isSubStructure2(A->right,B);
-    }
+    //     // 如果以上情况都不是的话
+    //     return isSubStructure2(A->left,B) || isSubStructure2(A->right,B);
+    // }
 
     bool isSubStructure(TreeNode* A, TreeNode* B) {
         if (A == nullptr || B == nullptr)// 约定空树不是任意一个树的子结构 // 进入dfs检查的条件
@@ -71,6 +71,7 @@ public:
 
     bool dfs(TreeNode* A, TreeNode* B)// 检查两棵树
     {
+        // 复习：这里一定先判断B！！！！！！A不空 且 B空，注意dfs第一次进来的条件是都非空
         if (B == nullptr)// 递归到B为空（一直没错）
             return true;
         if (A == nullptr)// 递归到B非空A为空

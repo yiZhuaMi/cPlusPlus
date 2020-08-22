@@ -130,13 +130,12 @@ public:
     // 基准值与重合的位置交换
     void QuickSort(int *a, int left, int right)
     {
-        if (left < right)
-        {
-            int key = Quick(a,left,right);// 索引小于大于key的都分别在左右两边
-            // print_a(a,left,right+1,key);
-            QuickSort(a,left,key-1);// 所以key不用再排序了
-            QuickSort(a,key+1,right);
-        }
+        if (left >= right)
+            return;
+        int key = Quick(a,left,right);// 索引小于大于key的都分别在左右两边
+        // print_a(a,left,right+1,key);
+        QuickSort(a,left,key-1);// 所以key不用再排序了
+        QuickSort(a,key+1,right);
     }
 
     void Merge(int *a, int l, int q, int r)
@@ -184,7 +183,7 @@ public:
             adjust(a,len,max_ind);// 现在max_ind指向较小的子节点 保证子树也是最大堆
         }
     }
-    // 堆排序
+    // 堆排序 建堆时间复杂度O（n）
     void HeapSort(int *a, int len)
     {
         // 构建大根堆（从右往左第一个非叶子节点 len/2-1）

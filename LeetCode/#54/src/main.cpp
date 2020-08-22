@@ -61,6 +61,6 @@ int main()
 {
     Solution s;
     // vector<vector<int>> v = {{1, 2, 3},{4, 5, 6},{7, 8, 9}};
-    vector<vector<int>> v = {{2},{3}};
+    vector<vector<int>> v = {{3},{2}};
     s.spiralOrder(v);
 }

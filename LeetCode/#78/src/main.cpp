@@ -22,23 +22,22 @@ using namespace std;
 class Solution
 {
 public:
+    vector<vector<int>> res;
     vector<vector<int>> subsets(vector<int>& nums) {
-        if (nums.empty())
-            return {};
-        vector<vector<int>> res;
-        vector<int> ans;
-        dfs(nums,res,ans,0);
+        vector<int> line;
+        dfs(nums,line,0);
         return res;
     }
 
-    void dfs(vector<int>& nums, vector<vector<int>>& res, vector<int>& ans, int start)
+    // 复习：第一层dfs的for循环，产生1、2、3开头的组合，更深层次的dfs只会往右走
+    void dfs(vector<int>& nums, vector<int>& line, int i)
     {
-        res.push_back(ans);
-        for (int i = start; i < nums.size(); i++)
+        res.push_back(line);
+        for (; i < nums.size(); i++)// !!!!!!!!!!
         {
-            ans.push_back(nums[i]);
-            dfs(nums,res,ans,i+1);// i+1 !!!!!!!!!!! 从左往右组合，不回头，就不会重复，本身也没有重复的数
-            ans.pop_back();
+            line.push_back(nums[i]);
+            dfs(nums,line,i+1);// i+1 !!!!!!!!!!! 从左往右组合，不回头，就不会重复，本身也没有重复的数
+            line.pop_back();
         }
     }
 };

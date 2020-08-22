@@ -25,7 +25,6 @@ void client()
     server_addr.sin_port = htons(port);
     inet_pton(AF_INET,IP,&server_addr.sin_addr);
 
-
     int socket_fd = socket(PF_INET,SOCK_STREAM,0);
     assert(socket_fd >= 0);
 

@@ -47,7 +47,8 @@ public:
         return min_sum;
     }
 
-    // 自底向上 原地修改 输出 [0][0]
+    // 复习
+    // 自底向上 无需dp 在triangle上原地修改 输出 [0][0]
     int minimumTotal(vector<vector<int>>& triangle) {
         if (triangle.size() < 2)
             return triangle.empty() ? 0 : triangle[0][0];

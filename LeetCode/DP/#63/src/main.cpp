@@ -31,6 +31,7 @@ public:
         if (obstacleGrid.empty() || obstacleGrid[0][0] == 1)
             return 0;
         vector<vector<int>> dp(obstacleGrid.size(),vector<int>(obstacleGrid[0].size(),0));
+        // 假设00位置肯定时无障碍的，因为从这里出发
         dp[0][0] = 1;
         for (int i = 0; i < obstacleGrid.size(); i++)
         {
@@ -56,6 +57,42 @@ public:
             }            
         }
         return dp[obstacleGrid.size()-1][obstacleGrid[0].size()-1];
+    }
+
+    int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid) {
+        int row = obstacleGrid.size(), col = obstacleGrid[0].size();
+        vector<vector<int>> dp(row,vector<int>(col,0));
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                //考虑障碍可能出现在00位置->全是0
+                if (obstacleGrid[i][j] == 1)
+                {
+                    dp[i][j] = 0;
+                }
+                else
+                {
+                    if (i + j == 0)
+                    {
+                        dp[i][j] = 1;
+                    }
+                    else if (i == 0)
+                    {
+                        dp[i][j] = dp[i][j-1];
+                    }
+                    else if (j == 0)
+                    {
+                        dp[i][j] = dp[i-1][j];
+                    }
+                    else
+                    {
+                        dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                    }
+                }
+            }   
+        }
+        return dp[row-1][col-1];
     }
 };
 

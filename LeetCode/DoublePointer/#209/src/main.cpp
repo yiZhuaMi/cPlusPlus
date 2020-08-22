@@ -24,31 +24,14 @@ public:
         while (right < nums.size())
         {
             sum += nums[right];
-            // right先扩张到 >=s 就收缩left
+            // 复习：right先扩张到 >=s 就不停的收缩left直到小于s
             while (sum >= s)// 注意：while!!!!!!!!!!!!
             {
                 res = min(res, right - left + 1);
                 sum -= nums[left];
-                left++;
+                left++;// ++不是--
             }
-            right++;
-        }
-        return res == INT32_MAX ? 0 : res;
-    }
-
-    int minSubArrayLen2(int s, vector<int>& nums) {
-        if (nums.empty())
-            return 0;
-        int left = 0, right = 0, sum = 0, res = INT32_MAX;
-        while (right < nums.size())
-        {
-            sum += nums[right];
-            while (sum >= s)
-            {
-                res = min(res,right-left+1);
-                sum -= nums[left];
-                left++;
-            }
+            // 小于s了再加入新的
             right++;
         }
         return res == INT32_MAX ? 0 : res;

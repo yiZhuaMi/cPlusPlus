@@ -17,6 +17,7 @@ public:
     
     void push(int x) {
         s.push(x);
+        // 复习：这里辅助栈为空可直接放入
         if (ass.empty() || x <= ass.top())
             ass.push(x);// 辅助栈：维护输入的非严格递减序列!!!!!!!!!!!!        
     }

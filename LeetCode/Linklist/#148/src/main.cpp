@@ -35,6 +35,7 @@ public:
         ListNode *p = h;
         while (l1 != NULL && l2 != NULL)
         {
+            // 复习：直接针线活，改变指针，不用new节点
             if (l1->val < l2->val)// 小的插入tmp链表
             {
                 p->next = l1;

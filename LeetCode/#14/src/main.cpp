@@ -27,6 +27,26 @@ public:
         }
         return strs.empty() ? "" : strs[0].substr(0,count);
     }
+
+    string longestCommonPrefix2(vector<string>& strs) {
+        if (strs.empty())
+            return "";
+        if (strs.size() == 1)
+            return strs[0];
+        string res;
+        int ind = 0;
+        while (1)
+        {
+            for (int i = 1; i < strs.size(); i++)
+            {
+                if (ind >= strs[i].length() || strs[i][ind] != strs[0][ind])
+                    return res;
+            }
+            res.push_back(strs[0][ind]);
+            ind++;
+        }
+        return res;
+    }
 };
 
 int main()

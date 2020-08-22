@@ -67,8 +67,8 @@ public:
         }
         return root;
     }
-
-    // 右左后的后序遍历
+    // 复习
+    // 右左根的后序遍历
     TreeNode* last = nullptr;
     void flatten(TreeNode* root) {
         if (root == nullptr)

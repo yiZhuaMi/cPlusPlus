@@ -36,9 +36,11 @@ public:
     }
 
     int reverse(int x) {
+        // 必须先处理INT32_MIN 下面处理不了
         if (x == INT32_MIN)
             return 0;
         int sign = x > 0 ? 1 : -1;
+        // 先取绝对值
         int z = x < 0 ? -x : x;
         int y = 0;
         while (z)
@@ -50,6 +52,7 @@ public:
             y = y * 10 + z % 10;
             z /= 10;
         }
+        // 最后加上符号
         return sign * y;
     }
 };
@@ -57,5 +60,5 @@ public:
 int main()
 {
     Solution s;
-    printf("%d\n",s.reverse(-2147483648));
+    printf("%d\n",s.reverse(-321));
 }

@@ -16,7 +16,7 @@ public:
         vector<vector<int>> ans;
         sort(nums.begin(),nums.end());
         int i = 0;
-        while (i < nums.size())// 对于每一个数 都从他的右边去找两个数与之相加
+        for (int i = 0; i < nums.size(); i++)
         {
             if (nums[i] > 0)// 因为递增，后面的都大于零，不可能和为零。
                 return ans;
@@ -41,9 +41,9 @@ public:
                     right--;
                 }
             }          
+            // 上面if中先移动左右指针，nums[i]的全部处理完以后，再跳重复的nums[i]
             while (i+1 < nums.size() && nums[i] == nums[i+1])
                 i++;
-            i++;// nums[i]不重复时需要递增；重复时，出了while后 nums[i]还是原值 也需要+1才是新值
         }
         return ans;
     }

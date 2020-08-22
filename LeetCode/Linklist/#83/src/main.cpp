@@ -15,19 +15,18 @@ public:
     ListNode* deleteDuplicates(ListNode* head) {
         if (head == nullptr || head->next == nullptr)
             return head;
-        ListNode *pre = nullptr, *p = head;
-        while (p->next != nullptr)
+        // 不可能出现删除head，所以无需h节点
+        // 保留第一个重复的，所以只要cur节点
+        ListNode *cur = head;
+        while (cur->next != nullptr)
         {
-            if (p->val == p->next->val)
+            if (cur->val == cur->next->val)
             {
-                ListNode *tmp = p->next;  
-                p->next = p->next->next;
-                delete tmp;
+                cur->next = cur->next->next;
             }
-            // 跳过了重复的就不要前进
             else
             {
-                p = p->next;   
+                cur = cur->next;
             }
         }
         return head;

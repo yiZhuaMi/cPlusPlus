@@ -20,6 +20,7 @@ public:
         if (nums.size() <= 1)
             return nums.size();
         int j = 0;
+        // fast指针从头到尾遍历整个数组
         for (size_t i = 0; i < nums.size(); i++)
             if (nums[i] != nums[j])
                 nums[++j] = nums[i];     

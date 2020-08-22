@@ -20,6 +20,7 @@ public:
         for (auto c : pushed)
         {
             s.push(c);
+            // 复习：注意s要非空，再top
             while (!s.empty() && s.top() == popped[i])
             {
                 s.pop();

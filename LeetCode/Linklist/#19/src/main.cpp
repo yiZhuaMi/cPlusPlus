@@ -19,13 +19,12 @@ public:
             return nullptr;
         ListNode *h = new ListNode(-1);// 新头节点
         h->next = head;// 指向原始头节点
-        ListNode *fast = head, *slow = head, *pre = h;
-        while (n - 1> 0)// 给定的 n 保证是有效的。所以这里无需判断为空
+        ListNode *fast = h, *slow = h, *pre = nullptr;
+        while (n--)// 给定的 n 保证是有效的。所以这里无需判断为空
         {
             fast = fast->next;
-            n--;
         }
-        while (fast->next != nullptr)// 让fast指向最后一个 slow最快就是fast
+        while (fast != nullptr)// 让fast指向最后一个 slow最快就是fast
         {
             fast = fast->next;
             pre = slow;

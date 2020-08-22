@@ -11,35 +11,33 @@ using namespace std;
 
 class Solution {
 public:
+    vector<string> res;
+    set<string> se;
     vector<string> permutation(string s) {
-        vector<string> res;
-        string one_ans = "";
-        vector<bool> used(s.length(),false);
-        set<string> set;
-        dfs(s,one_ans,res,used,set,true);
+        vector<int> used(s.size());
+        string line;
+        dfs(s,line,used);
         return res;
     }
 
-    // 要去重！！！！！！！
-    void dfs(const string &s, string &one_ans, vector<string> &res, vector<bool> &used, set<string> &set, bool top)
+    void dfs(string s, string& line, vector<int>& used)
     {
-        if (one_ans.length() == s.length() && set.find(one_ans) == set.end())
+        // 复习：排列组合+去重
+        if (line.length() == s.length() && se.find(line) == se.end())
         {
-            res.push_back(one_ans);
-            set.insert(one_ans);
+            res.push_back(line);
+            se.insert(line);
             return;
         }
         for (int i = 0; i < s.length(); i++)
         {
-            if (i < s.length() - 1 && top && s[i] == s[i+1])// 处于顶层递归，也就是排列第一个字符，与下一个相同 则剪枝
-                continue;
-            if (!used[i])
+            if (used[i] == 0)
             {
-                one_ans.push_back(s[i]);
-                used[i] = true;
-                dfs(s,one_ans,res,used,set,false);
-                one_ans.pop_back();
-                used[i] = false;
+                used[i] = 1;
+                line.push_back(s[i]);
+                dfs(s,line,used);
+                line.pop_back();
+                used[i] = 0;
             }
         }
     }

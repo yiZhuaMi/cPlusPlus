@@ -12,7 +12,7 @@ public:
         if (nums.size() < 2)
             return nums.empty() ? 0 : nums[0];
         int res = nums[0];
-        int imax = 1, imin = 1;// 以当前值结尾的连续子数组的乘积的最值
+        int imax = 1, imin = 1;// 复习：以当前值结尾的连续子数组的乘积的最值
         for (size_t i = 0; i < nums.size(); i++)
         {
             if (nums[i] < 0)// 此时乘以imax会变最小，乘以imin会变大，所以交换

@@ -48,10 +48,10 @@ public:
     // 从大到小 快排
     int partition(vector<int>& nums, int k, int left, int right)
     {
-        int key = left, r = right;
+        int key = left, r = right;// 保存右边界
         while (left < right)
         {
-            while (left < right && nums[right] <= nums[key])
+            while (left < right && nums[right] <= nums[key])// 复习：这里改变了不等号方向，变成从大到小排序
                 right--;
             while (left < right && nums[left] >= nums[key])
                 left++;
@@ -65,7 +65,7 @@ public:
         if (key == k)
             return nums[key];
         else if (key < k)
-            return partition(nums,k,key + 1,r);// 原来的右边界r
+            return partition(nums,k,key + 1,r);// 复习：key不用参与了；原来的右边界r
         else
             return partition(nums,k,left,key - 1);// 原来的左边界left
     }
@@ -73,44 +73,7 @@ public:
     // 快排思想
     int findKthLargest3(vector<int>& nums, int k) {
         // 第k大 k>=1 
-        return partition(nums,k-1,0,nums.size()-1);
-    }
-
-    int findKthLargest4(vector<int>& nums, int k) {
-        sort(nums.begin(),nums.end());
-        return nums[nums.size()-k];
-    }
-
-    int find_k_elem(vector<int>& v, int k, int l, int r)
-    {
-        if (v.empty())
-            return -1;
-        int left = 0, right = v.size()-1;
-        int key = left;
-        while (left < right)
-        {
-            while (left < right && v[right] <= v[key])
-                right--;
-            while (left < right && v[left] >= v[key])
-                left++;        
-            swap(v[left],v[right]);
-        }
-        swap(v[key],v[left]);
-        swap(key,left);
-
-        if (key > k)
-        {
-            return find_k_elem(v,k,l,key-1);
-        }
-        else if (key < k)
-        {
-            return find_k_elem(v,k,key+1,r);
-        }
-        // key == k
-        else
-        {
-            return v[key];
-        }
+        return partition(nums,k-1,0,nums.size()-1);// 复习：左闭右闭的
     }
 };
 

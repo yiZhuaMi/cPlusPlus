@@ -37,6 +37,7 @@ public:
             l2 = l2->next;
         }
         int addition = 0;
+        // 无需头节点！！！
         ListNode *res = nullptr;
         // 再依次出栈 相加
         while (!s1.empty() || !s2.empty() || addition != 0)
@@ -55,6 +56,7 @@ public:
             }
             int sum = n1 + n2 + addition;
             addition = sum / 10;
+            // 注意构造链表反过来构造！！！
             ListNode *cur = new ListNode(sum % 10);
             cur->next = res;
             res = cur;

@@ -12,46 +12,41 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-
+// 重复
 class Solution {
 public:
+    // 每次删除重复的后一个，重复的第一个等到else／不重复的里面去删除
     ListNode* deleteDuplicates(ListNode* head) {
         if (head == nullptr || head->next == nullptr)
             return head;
-        ListNode *h = new ListNode(-1);
+        ListNode* h = new ListNode(-1);
         h->next = head;
-        ListNode *pre = h, *p = h->next;
+        ListNode *pre = h, *cur = h->next;
         bool rep = false;
-        while (p->next != nullptr)
+        while (cur->next != nullptr)
         {
             // 跳过了重复的就不要前进
-            if (p->val == p->next->val)
+            if (cur->val == cur->next->val)
             {
-                p->next = p->next->next;
+                cur->next = cur->next->next;
                 rep = true;
             }
             else
             {
                 // 跳过最后剩下的一个重复的
                 if (rep)
-                {
-                    pre->next = p->next;
-                    p = p->next;
-                    rep = false;
-                }
+                    pre->next = cur->next;
                 // 正常推进
                 else
-                {
-                    pre = p;
-                    p = p->next;
-                }
+                    pre = cur;
+                cur = cur->next;
+                rep = false;
             }
         }
         // 链表末尾的节点也是重复的需要删除
         if (rep)
-        {
-            pre->next = nullptr;
-        }
+            pre->next = cur->next;  
+                  
         return h->next;
     }
 };

@@ -35,10 +35,11 @@ public:
         vector<int> v;
         for (size_t l = 1, r = 2; l < target/2+1;)
         {
+            // 复习：连续序列，用公式求和
             sum = (l + r) * (r - l + 1) / 2;
-            if (sum > target)// 以l为起点没有解
+            if (sum > target)// 以l为起点没有解，窗口缩小
                 l++;
-            else if (sum < target)// r右移
+            else if (sum < target)// r右移，窗口增大
                 r++;
             else// bingo
             {

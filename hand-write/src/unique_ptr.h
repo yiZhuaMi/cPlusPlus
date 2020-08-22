@@ -25,6 +25,7 @@ public:
         return *this;
     }
 
+    // 控制生命周期 要delete
     void reset(T* ptr)
     {
         if (_ptr != nullptr)

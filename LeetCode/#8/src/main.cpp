@@ -17,7 +17,7 @@ using namespace std;
 
 class Solution {
 public:
-    int myAtoi(string str) {
+    int myAtoi3(string str) {
         if (str.empty())
             return 0;
         int ind = 0; // 指向字符串的指针
@@ -81,10 +81,40 @@ public:
         }
         return res * sign;
     }
+
+    int myAtoi(string str) {
+        int ind = 0, len = str.length();
+        while (ind < len && str[ind] == ' ')
+            ++ind;
+        if (ind >= len || (str[ind] != '+' && str[ind] != '-' && (str[ind] < '0' || str[ind] > '9')))
+            return 0;
+        int sign = 1;
+        if (str[ind] == '-')
+        {
+            sign = -1;
+            ind++;
+        }
+        else if (str[ind] == '+')
+        {
+            ind++;
+        }
+        int res = 0;
+        while (str[ind] > '0' && str[ind] < '9')
+        {
+            int cur = str[ind] - '0';
+            if (sign > 0 && (res > INT32_MAX / 10 || (res == INT32_MAX / 10 && cur >= 7)))
+                return INT32_MAX;
+            if (sign < 0 && (res > INT32_MIN / -10 || (res == INT32_MIN / -10 && cur >= 8)))
+                return INT32_MIN;
+            res = res * 10 + cur;
+            ind++;
+        }
+        return sign * res;
+    }
 };
 
 int main()
 {
     Solution s;
-    printf("%d\n",s.myAtoi2("-2147483647"));
+    printf("%d\n",s.myAtoi("4193 with words"));
 }

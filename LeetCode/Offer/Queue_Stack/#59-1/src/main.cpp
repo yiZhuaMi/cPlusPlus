@@ -32,13 +32,13 @@ public:
         vector<int> res;
         for (int i = 0; i < nums.size(); i++)
         {
-            // q中维护从尾到头的递增序列
+            // 复习：q中维护从尾到头的递增序列
             while (!q.empty() && nums[i] > q.back()) // 比nums[i]小的全部弹出 再加入nums[i]
                 q.pop_back();
             // nums[i]进入窗口时，队列中至少会有一个就是自己
             q.push_back(nums[i]); // 这样使得队列从尾到头递增
 
-            if (i >= k && nums[i-k] == q.front()) // 需要右移窗口了 并且移出窗口的是窗口中的最大值，也就是队头
+            if (i >= k && nums[i-k] == q.front()) // 需要右移窗口了 && 移出窗口的是窗口中的最大值，也就是队头
                 q.pop_front();
 
             if (i >= k - 1)// 窗口完整了，可以开始记录最大值

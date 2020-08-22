@@ -32,6 +32,7 @@ public:
         {
             if (head->val < x)
             {
+                // 待解决：为什么不能只移动指针
                 // lp->next = head;
                 lp->next = new ListNode(head->val);
                 lp = lp->next;

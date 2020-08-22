@@ -22,25 +22,25 @@ public:
     int maximalSquare(vector<vector<char>>& matrix) {
         if (matrix.empty())
             return 0;
-        vector<vector<char>> dp(matrix.size(),vector<char>(matrix[0].size()));// dp[i][j]:以matrix[i][j]为右下角的最大正方形边长
-        dp[0][0] = matrix[0][0];
+        int row = matrix.size(), col = matrix[0].size();
+        vector<vector<int>> dp(row,vector<int>(col,0));// dp[i][j]:以matrix[i][j]为右下角的最大正方形边长
         int max_len = 0;
-        for (int i = 0; i < matrix.size(); i++)
+        for (int i = 0; i < row; i++)
         {
-            for (int j = 0; j < matrix[0].size(); j++)
+            for (int j = 0; j < col; j++)
             {
-                if (i > 0 && j > 0 && matrix[i][j] == '1')
+                // 第一行／第一列都等于自己
+                if (i * j == 0)
                 {
-                    // 必须取min，左上、左、上中有一个为0就组成不了正方形
+                    dp[i][j] = matrix[i][j] - '0';
+                }
+                else if (matrix[i][j] == '1')
+                {
+                    // 复习：必须取min，左上、左、上中有一个为0就不能参与正方形
                     dp[i][j] = 1 + min(dp[i-1][j-1],min(dp[i-1][j],dp[i][j-1]));
                 }
-                // 第一行／第一列／0 都等于自己
-                else
-                {
-                    dp[i][j] = matrix[i][j];
-                }
-                max_len = max(max_len,dp[i][j] - '0');
-            }            
+                max_len = max(max_len,dp[i][j]);
+            }   
         }
         return max_len * max_len;
     }

@@ -6,9 +6,16 @@ using namespace std;
 
 class Solution {
 public:
-    string reverseLeftWords(string s, int n) {
-
+    string reverseLeftWords2(string s, int n) {
         return s.substr(n,s.length()-n) + s.substr(0,n);
+    }
+
+    string reverseLeftWords(string s, int n) {
+        int len = n % s.length();
+        reverse(s.begin(),s.begin() + len);
+        reverse(s.begin() + len,s.end());
+        reverse(s.begin(),s.end());
+        return s;
     }
 };
 

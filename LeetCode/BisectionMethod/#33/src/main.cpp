@@ -29,7 +29,7 @@ public:
             // mid左边有序
             if (nums[mid] >= nums[left])// 先要确定哪边有序
             {
-                // taget在mid左边
+                // 用mid／left来判断taget在mid左边
                 if (target < nums[mid] && target >= nums[left])// 才能通过有序的这一边用比较运算符判断target是否在这一边
                     right = mid - 1;
                 // taget在mid右边
@@ -39,7 +39,7 @@ public:
             // mid右边有序
             else// nums[mid] < nums[left]
             {
-                // taget在mid右边
+                // 用mid／right来判断taget在mid右边
                 if (target > nums[mid] && target <= nums[right])
                     left = mid + 1;
                 // taget在mid左边
@@ -48,6 +48,36 @@ public:
             }   
         }
         return -1;
+    }
+
+    int search2(vector<int>& nums, int target) {
+        if (nums.empty())
+            return -1;
+        int left = 0, right = nums.size() - 1;
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target)
+                return mid;
+            // 左边有序
+            if (nums[mid] >= nums[right])// 是否取等号都可以
+            {
+                // 确定一边有序以后，一定要用mid和right／left来确定
+                if (target < nums[mid] && target >= nums[left])
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            // 右边有序
+            else// if (nums[mid] < nums[right])
+            {
+                if (target > nums[mid] && target <= nums[right])
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+        }   
+        return -1;  
     }
 };
 

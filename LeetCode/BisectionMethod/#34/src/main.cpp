@@ -22,16 +22,18 @@ public:
         while (left <= right)
         {
             int mid = left + (right - left) / 2;
+            // 复习：找左右边界时，不等号中的是一样的！！！！！！
             if (nums[mid] < target)
                 left = mid + 1;
             else if (nums[mid] > target)
                 right = mid - 1;
             // 找到以后不立即返回 而是收缩右边界
             else
-                right = mid - 1;// !!!!!!!!!!!!!!!!!!!!!
+                right = mid - 1;// 复习：一定要-1+1，否则超时!!!!!!!!!!!!!!!!!!!!!
         }
         // 由于 while 的退出条件是 left == right + 1，所以当 target 比 nums 中所有元素都大时，最后left==len使得索引越界：
         
+        // 复习
         // 退出条件是 left == right + 1
         // 但有两种失败情况：
         // 1.left没有越界，但是nums[left] != target
@@ -66,5 +68,6 @@ public:
 int main()
 {   
     Solution s;
-    vector<int> v = {2,2,2,3,1};
+    vector<int> v = {5,7,7,8,8,10};
+    s.searchRange(v,3);
 }

@@ -62,7 +62,7 @@ public:
             if (m.size() > cap)
             {
                 // 删除位置
-                m.erase(li.back().first);
+                m.erase(li.back().first);// 复习
                 // 删除缓存
                 li.pop_back();
             }

@@ -28,17 +28,19 @@ public:
     // 参数非const
     My_Shared_Ptr<T>& operator=(My_Shared_Ptr<T>& other)
     {
+        // 修改计数
         ++*other._ref_count;
         --*_ref_count;
+        // 是否销毁
         if (*_ref_count <= 0 && _ptr != nullptr)
         {
             delete _ptr;
             delete _ref_count;
             printf("operator= delete %d\n",*_ptr);
         }
+        // 赋值
         _ptr = other._ptr;
-        // 引用计数指针 指向同一个 int变量 共享计数!
-        _ref_count = other._ref_count;
+        _ref_count = other._ref_count;// 引用计数指针 指向同一个 int变量 共享计数!
         return *this;
     }
 

@@ -22,8 +22,8 @@ public:
     int add(int a, int b) {
         if (b == 0)// 递归结束条件 当进位数等于0，返回无进位和a
             return a;
-        // c++不支持负值左移，需要强制转换为无符号数
-        return add (a ^ b, (unsigned int)(a & b) << 1);// 由于将无进位和和进位数相加也不能用+法，所以递归
+        // 复习：c++不支持负值左移，需要强制转换为无符号数
+        return add(a ^ b, (unsigned int)(a & b) << 1);// 由于将无进位和和进位数相加也不能用+法，所以递归
     }
 };
 

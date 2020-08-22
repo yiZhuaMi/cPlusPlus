@@ -43,6 +43,18 @@ public:
                 break;      
         }
     }
+
+    void merge2(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        if (m == 0)
+            nums1 = nums2;
+
+        int ind1 = m - 1, ind2 = n - 1, ind = m + n - 1;
+        while (ind1 >= 0 && ind2 >= 0)
+            nums1[ind--] = nums1[ind1] >= nums2[ind2] ? nums1[ind1--] : nums2[ind2--];
+
+        while (ind2 >= 0)
+            nums1[ind--] = nums2[ind2--];
+    }
 };
 
 int main()

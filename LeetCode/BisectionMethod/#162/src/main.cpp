@@ -27,6 +27,7 @@ public:
         if (nums.empty())
             return -1;
         int left = 0, right = nums.size() - 1;
+        // 复习：这里不能相等
         while (left < right)
         {
             int mid = left + (right - left) / 2;

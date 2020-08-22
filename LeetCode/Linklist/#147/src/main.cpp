@@ -84,7 +84,7 @@ public:
                 pre->next = p->next;
                 ListNode *pi = phead;// 不用特殊处理头节点
                 // 从头往后找
-                while (p->val > pi->next->val)
+                while (p->val > pi->next->val)// 复习：跟pi的下一个比较
                 {
                     pi = pi->next;
                 }

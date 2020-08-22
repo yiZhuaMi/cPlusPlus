@@ -84,7 +84,8 @@ public:
         dfs(root->left,sum);
         dfs(root->right,sum);
         // 当把一个节点的左右子树都检查完才会pop这个结点
-        path.pop_back();//恢复！！！ 一直递归到叶子结点才会第一次pop 自底向上pop
+        path.pop_back();// 回溯！！！ 一直递归到叶子结点才会第一次pop 自底向上pop
+        // num是拷贝的，无需回溯
     }
 };
 

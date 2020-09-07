@@ -67,12 +67,13 @@ public:
         }
         return root;
     }
-    // 复习
-    // 右左根的后序遍历
+
+    // 右左根的后序遍历(前序相反)
     TreeNode* last = nullptr;
     void flatten(TreeNode* root) {
         if (root == nullptr)
             return;
+        // 复习：分别递归右左
         flatten(root->right);
         flatten(root->left);
         // 上一行递归完后 right指向原来的左子树

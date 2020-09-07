@@ -29,18 +29,19 @@ public:
     
     int firstMissingPositive(vector<int> &nums)
     {
-        for (int i = 0; i < nums.size();)// !!!
+        for (int i = 0; i < nums.size();)// 复习：!!!
         {
             // 复习
-            // 1.正数才让他回家 && 2.确保nums[nums[i]-1]不会越界
-            if (nums[i] >= 1 && nums[i] < nums.size() + 1 &&
-            // 3.确保nums[i]要去的下标nums[i]-1处对应的数不正确(没有被另一个自己占用)
+            // 1.确保nums[nums[i]-1]不会越界
+            // nums[i] - 1 >= 0 && nums[i] - 1 < nums.size()
+            if (nums[i] >= 0 + 1 && nums[i] < nums.size() + 1 &&
+            // 2.确保nums[i]要去的下标nums[i]-1处对应的数不正确(没有被另一个自己占用)
                 nums[nums[i] - 1] != nums[i])
             {
                 swap(nums[i],nums[nums[i] - 1]);
             }
             else
-                i++;
+                i++;// 复习
         }
 
         for (int i = 0; i < nums.size(); i++)

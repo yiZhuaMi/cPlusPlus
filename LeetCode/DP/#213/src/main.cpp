@@ -10,39 +10,41 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
     // 最后一家不偷 正偷一遍 反偷一遍
-    int rob(vector<int>& nums) {
+    int rob(vector<int> &nums)
+    {
         if (nums.size() < 2)
             return nums.empty() ? 0 : nums[0];
         int len = nums.size();
-        vector<int> dp(len,0);// dp[i]:在此位置上能偷到的最大金额
-        
+        vector<int> dp(len, 0); // dp[i]:在此位置上能偷到的最大金额
+
         dp[0] = nums[0];
-        dp[1] = max(nums[0],nums[1]);
-        int res1 = max(dp[0],dp[1]);
-        for (size_t i = 2; i < len - 1; i++)// 复习：从第三家开始，到<len-1，最后一家不偷
+        dp[1] = max(nums[0], nums[1]);
+        int res1 = max(dp[0], dp[1]);
+        for (size_t i = 2; i < len - 1; i++) // 复习：从第三家开始，到<len-1，最后一家不偷
         {
-            dp[i] = max(nums[i]+dp[i-2],dp[i-1]);
-            res1 = max(res1,dp[i]);
+            dp[i] = max(nums[i] + dp[i - 2], dp[i - 1]);
+            res1 = max(res1, dp[i]);
         }
-        
-        dp[len-1] = nums[len-1];
-        dp[len-2] = max(nums[len-1],nums[len-2]);
-        int res2 = max(dp[0],dp[1]);
-        for (int i = len-3; i > 0; i--)// 从倒数第三家开始，到1，第一家不偷
+
+        dp[len - 1] = nums[len - 1];
+        dp[len - 2] = max(nums[len - 1], nums[len - 2]);
+        int res2 = max(dp[0], dp[1]);
+        for (int i = len - 3; i > 0; i--) // 从倒数第三家开始，到1，第一家不偷
         {
-            dp[i] = max(nums[i]+dp[i+2],dp[i+1]);
-            res2 = max(res2,dp[i]);
+            dp[i] = max(nums[i] + dp[i + 2], dp[i + 1]);
+            res2 = max(res2, dp[i]);
         }
-        return max(res1,res2);
+        return max(res1, res2);
     }
 };
 
 int main()
 {
-    vector<int> v = {1,2,1,1};
+    vector<int> v = {1, 2, 1, 1};
     Solution s;
-    printf("%d\n",s.rob(v));
+    printf("%d\n", s.rob(v));
 }

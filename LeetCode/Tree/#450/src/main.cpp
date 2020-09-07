@@ -58,7 +58,7 @@ public:
         while (n->left != NULL)// 找到右子树中最小值(一定是个叶子结点)，与root->val交换
             n = n->left;
         root->val = n->val;// 赋最小值
-        root->right = deleteNode(root->right,n->val);// 用递归来删除找到的最小值叶子结点
+        root->right = deleteNode(root->right,n->val);// 复习：一定用递归来删除找到的最小值叶子结点
         return root;
     }
 };

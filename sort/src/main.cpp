@@ -1,6 +1,7 @@
 //排序算法
 
 #include <iostream>
+#include <stack>
 #include <ctime>
 using namespace std;
 
@@ -138,6 +139,59 @@ public:
         QuickSort(a,key+1,right);
     }
 
+    // 快速排序 非递归
+    // 递归的算法主要是在划分子区间，如果要非递归实现快排，只要使用一个栈来保存区间就可以了。
+    // 一般将递归程序改成非递归首先想到的就是使用栈，因为递归本身就是一个压栈的过程。
+    int partiton(int *a, int left, int right)
+    {
+        int key = left;
+        while (left < right)
+        {
+            while (left < right && a[key] <= a[right])
+            {
+                right--;
+            }
+            while (left < right && a[left] <= a[key])
+            {
+                left++;
+            }
+            swap(a[right],a[left]);
+        }
+        swap(a[key],a[left]);
+        return left;
+    }
+
+    // 特别注意区分right／r，left／l
+    void QuickSortNotR(int* a, int l, int r)
+    {
+        stack<int> st;
+        st.push(l);
+        st.push(r);
+        while (!st.empty())
+        {
+            // 后入栈的r，所以先取出来的是r
+            int right = st.top();
+            st.pop();
+            int left = st.top();
+            st.pop();
+
+            int key = partiton(a,left,right);
+            // 确保区间至少有两个数
+            if (key - 1 > left)
+            {
+                // 入栈key左边的[left,key-1]
+                st.push(left);
+                st.push(key - 1);
+            }
+            if (key + 1 < right)
+            {
+                // 入栈key右边的[key+1,right]
+                st.push(key + 1);
+                st.push(right);
+            }
+        }
+    }
+
     void Merge(int *a, int l, int q, int r)
     {
         int *tmp = new int[r - l + 1]; // ！！！！！！！！！！！！！！！！！
@@ -228,15 +282,22 @@ int main()
 
     int e[] = {3,6,1,4,8,2,7,9,5,10};
     time_start = clock();
-    s.MergeSort(e,0,len-1);
+    s.QuickSortNotR(e,0,len-1);
     time_end = clock();
-    cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) MergeSort ";
+    cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) QuickSortNotR ";
     print_a(e,len);
 
     int f[] = {3,6,1,4,8,2,7,9,5,10};
     time_start = clock();
-    s.HeapSort(f,len);
+    s.MergeSort(f,0,len-1);
+    time_end = clock();
+    cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) MergeSort ";
+    print_a(f,len);
+
+    int g[] = {3,6,1,4,8,2,7,9,5,10};
+    time_start = clock();
+    s.HeapSort(g,len);
     time_end = clock();
     cout<<"("<<1000*(time_end-time_start)/(double)CLOCKS_PER_SEC<<"ms) HeapSort ";
-    print_a(e,len);
+    print_a(g,len);
 }

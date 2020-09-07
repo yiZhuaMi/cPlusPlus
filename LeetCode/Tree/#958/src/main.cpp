@@ -42,6 +42,7 @@ public:
             {
                 TreeNode* node = q.front();
                 q.pop();
+                // 复习：注意这里的if else if
                 if (node == nullptr)
                 {
                     flag = 1;

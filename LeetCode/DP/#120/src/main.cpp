@@ -54,8 +54,7 @@ public:
             return triangle.empty() ? 0 : triangle[0][0];
         for (int i = triangle.size()-2; i >= 0; i--)// 从倒数第二行开始
             for (int j = 0; j < triangle[i].size(); j++)
-                triangle[i][j] = triangle[i][j] 
-                               + min(triangle[i+1][j],triangle[i+1][j+1]);    
+                triangle[i][j] = triangle[i][j] + min(triangle[i+1][j],triangle[i+1][j+1]);    
         return triangle[0][0];             
     }
 };

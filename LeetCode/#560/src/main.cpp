@@ -24,6 +24,7 @@ public:
     int subarraySum(vector<int>& nums, int k) {
         // <前缀和,出现次数>
         unordered_map<int,int> m;
+        // 复习：和为0的有一个!!!!!!!!!
         m[0] = 1;
         // 总的前缀和
         int presfix_sum = 0;
@@ -32,12 +33,12 @@ public:
         {
             // 先加上当前数
             presfix_sum += nums[i];
-            // 看一下加上了nums[i]的前缀和presfix_sum，有咩有谁能+k=presfix_sum
+            // 复习：看一下加上了nums[i]的前缀和presfix_sum，有咩有谁能+k=presfix_sum
             if (m.find(presfix_sum - k) != m.end())
             {
-                res += m[presfix_sum - k];
+                res += m[presfix_sum - k];// 更新输出
             }
-            m[presfix_sum]++;
+            m[presfix_sum]++;// 更新前缀和出现的次数
         }
         return res;
     }

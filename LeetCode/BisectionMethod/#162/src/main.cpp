@@ -32,7 +32,7 @@ public:
         {
             int mid = left + (right - left) / 2;
             // 不用考虑边界，相邻元素不相等，所以只有两种情况
-            if (nums[mid] > nums[mid+1])
+            if (nums[mid] > nums[mid+1])// 复习：注意这里是mid和mid+1比较
             {
                 right = mid;
             }

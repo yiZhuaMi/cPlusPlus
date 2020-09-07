@@ -28,7 +28,7 @@ public:
 
         for (int i = 0; i < S.size(); i++)
         {
-            // 区间中有更长的，就扩大end
+            // 复习：不停的更新end！！！！！！max!!!!区间中有更长的，就扩大end
             end = max(end,m[S[i]]);
             // 如果i追上了end 就添加
             if (i == end)

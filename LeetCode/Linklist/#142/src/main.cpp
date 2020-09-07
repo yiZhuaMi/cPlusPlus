@@ -29,16 +29,16 @@ public:
     ListNode *detectCycle(ListNode *head) {
         // 复习：fast = head！！！若是=head->next导致相遇点不同！！！！
         ListNode *fast = head, *low = head;
-        while (true)
+        while (fast != nullptr && fast->next != nullptr)
         {
-            if (fast == nullptr || fast->next == nullptr)// 没有环
-                return nullptr;
-            // 先走再判等
             fast = fast->next->next;
             low = low->next;
-            if (fast == low)// 找到了环上的相遇点
+            if (fast == low)
                 break;
         }
+        if (fast != low)
+            return nullptr;
+            
         fast = head;
         while (fast != low)
         {

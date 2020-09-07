@@ -37,7 +37,7 @@ public:
             l2 = l2->next;
         }
         int addition = 0;
-        // 无需头节点！！！
+        // 复习：无需头节点！！！
         ListNode *res = nullptr;
         // 再依次出栈 相加
         while (!s1.empty() || !s2.empty() || addition != 0)

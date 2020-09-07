@@ -25,6 +25,7 @@ public:
             fast = fast->next->next;
             low = low->next;
         }
+        // 可以无需将前半部分结尾置空，则指向中间节点／后半部分开头，因为后半部分最后是指向空的，总会退出循环
         // low指向后半部分开头（偶数） 或者 中间节点（奇数）（就算加上中间节点一起反转，它会变成的最后一个，不影响下面判等）
         ListNode *cur = low, *pre = nullptr, *next = nullptr;
         while (cur != nullptr)

@@ -39,16 +39,21 @@ public:
         return res;
     }
     
-    vector<int> nextGreaterElements2(vector<int>& nums) {
+    // 与每日温度做法相同
+    vector<int> nextGreaterElements(vector<int>& nums) {
         int len = nums.size();
-        vector<int> res(len);
-        stack<int> s;
-        for (int i = 2 * len - 1; i >= 0; i--)
+        // 存下标
+        stack<int> st;
+        vector<int> res(len,-1);
+        for (int i = 0; i < 2 * len; i++)
         {
-            while (!s.empty() && nums[i % len] >= s.top())
-                s.pop();
-            res[i % len] = s.empty() ? -1 : s.top();
-            s.push(nums[i % len]);
+            // 递减的单调栈，大于栈顶，弹出栈顶，更新栈顶对应值
+            while (!st.empty() && nums[i % len] > nums[st.top()])
+            {
+                res[st.top()] = nums[i % len];
+                st.pop();
+            }
+            st.push(i % len);
         }
         return res;
     }

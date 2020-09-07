@@ -33,11 +33,13 @@ public:
         }
         return dp[text1.length()][text2.length()];
     }
+    
     int longestCommonSubsequence(string text1, string text2) {
         // dp[i][j]:text1[0~i]和text2[0~j]的最长公共子序列长度。
         vector<vector<int>> dp(text1.length(),vector<int>(text2.length(),0));
         if (text1[0] == text2[0])
             dp[0][0] = 1;
+        // [i-1]、[j-1]、[i-1][j-1] --->>> 从左往右 从上至下
         for (size_t i = 1; i < text1.length(); i++)
         {
             for (size_t j = 1; j < text2.length(); j++)

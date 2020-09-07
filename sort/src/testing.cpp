@@ -1,6 +1,7 @@
 //排序算法 自练习
 
 #include <iostream>
+#include <stack>
 using namespace std;
 
 static void print_a(int *a, int len)
@@ -57,6 +58,32 @@ void quickSort(int *a, int left, int right)
     int key = partition(a,left,right);
     quickSort(a,left,key-1);
     quickSort(a,key+1,right);
+}
+
+void quickSortNotR(int* a, int left, int right)
+{
+    stack<int> st;
+    st.push(left);
+    st.push(right);
+    while (!st.empty())
+    {
+        int r = st.top();
+        st.pop();
+        int l = st.top();
+        st.pop();
+        
+        int key = partition(a,l,r);
+        if (key - 1 > l)
+        {
+            st.push(l);
+            st.push(key - 1);
+        }
+        if (key + 1 < r)
+        {
+            st.push(key + 1);
+            st.push(r);
+        }
+    }
 }
 
 void merge(int *a, int left, int q, int right)
@@ -156,6 +183,6 @@ int main()
     int a[] = {6, 4, 9, 8, 5, 7, 4, 3};
     int len = sizeof(a) / sizeof(a[0]);
     print_a(a, len);
-    heapSort(a,len);
+    quickSortNotR(a,0,len - 1);
     print_a(a, len);
 }

@@ -23,7 +23,7 @@ public:
     int longestValidParentheses(string s) {
         // 存放下标
         stack<int> st;
-        // 向栈中预置一个-1，将计算长度的方式转化成“）”的下标减去 出栈后 栈顶元素的下标
+        // 向栈中预置一个-1，将计算长度的方式转化成")"的下标减去 出栈后 栈顶元素的下标
         st.push(-1);
         int res = 0;
         for (int i = 0; i < s.length(); i++)

@@ -60,6 +60,33 @@ public:
         pre->next = h2->next;
         return head;
     }
+
+    // 复习：奇偶头节点，针线活
+    ListNode* oddEvenList2(ListNode* head) {
+        if (head == nullptr || head->next == nullptr)
+            return head;
+        ListNode* h1 = new ListNode(-1);
+        ListNode* h2 = new ListNode(-1);
+        ListNode *p1 = h1, *p2 = h2, *p = head;
+        int flag = 1;
+        while (p != nullptr)
+        {
+            if (flag++ % 2 != 0)
+            {
+                p1->next = p;
+                p1 = p1->next;
+            }
+            else
+            {
+                p2->next = p;
+                p2 = p2->next;
+            }
+            p = p->next;
+        }
+        p2->next = nullptr;
+        p1->next = h2->next;
+        return h1->next;
+    }
 };
 
 void printList(ListNode* p)
@@ -86,6 +113,6 @@ int main()
     n3->next = n4;
     n4->next = n5;
     printList(n1);
-    s.oddEvenList(n1);
+    s.oddEvenList2(n1);
     printList(n1);
 }

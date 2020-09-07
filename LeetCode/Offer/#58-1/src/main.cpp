@@ -41,10 +41,41 @@ public:
         }
         return res;
     }
+
+    // 没有处理多余空格
+    string reverseWords2(string s) {
+        int left = 0, right = s.length() - 1;
+        while (left < right)
+        {
+            char tmp = s[left];
+            s[left++] = s[right];
+            s[right--] = tmp;
+        }
+        for (left = 0, right = 0; right < s.length();)
+        {
+            if (right + 1 >= s.length() || s[right + 1] == ' ')
+            {
+                int r = right;
+                while (left < right)
+                {
+                    int tmp = s[left];
+                    s[left++] = s[right];
+                    s[right--] = tmp;
+                }
+                right = r + 2;
+                left = r + 2;
+            }
+            else
+            {
+                right++;
+            }
+        }
+        return s;
+    }
 };
 
 int main()
 {
     Solution s;
-    printf("%s\n",s.reverseWords("  hello world!  ").c_str());
+    printf("%s\n",s.reverseWords2("the sky is blue").c_str());
 }

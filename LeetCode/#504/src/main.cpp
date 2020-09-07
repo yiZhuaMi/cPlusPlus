@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 class Solution {
@@ -44,6 +45,24 @@ public:
             num /= 7;
         }
         return string(res.rbegin(),res.rend());
+    }
+
+    // 题目有范围限制，可以不考虑取绝对值后溢出
+    string convertToBase7(int num) {
+        if (num == 0)
+            return "0";
+        int sign = num > 0 ? 1 : -1;
+        num = abs(num);
+        string res;
+        while (num)
+        {
+            res.push_back(num % 7 + '0');
+            num /= 7;
+        }
+        if (sign < 0)
+            res.push_back('-');
+        reverse(res.begin(),res.end());
+        return res;
     }
 };
 

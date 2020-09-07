@@ -29,16 +29,16 @@ public:
             int len1 = expandAroundCenter(s,i,i);
             int len2 = expandAroundCenter(s,i,i+1);
             int len = max(len1,len2);
-            if (len > end - start)// 更长
+            if (len > end - start + 1)// 复习
 			{
-				start = i - (len - 1) / 2;// ！！！！！！！！！！！！！！！！！
+				start = i - (len - 1) / 2;// 复习 ！！！！！！！！！！！！！！！！！
 				end = i + len / 2;
 			}
         }
-        return s.substr(start,end - start + 1);// (开始，长度)!!!!!!!!!!!!!
+        return s.substr(start,end - start + 1);// 复习：(开始，长度)!!!!!!!!!!!!!
     }
     
-    // 找出以left right为中心的最长回文子串长度
+    // 找出以left right为中心的最长回文子串长度(aa=2,ab=0,aba=3)
     int expandAroundCenter(string s, int left, int right)
     {
         while (left >= 0 && right <= s.length() && s[left] == s[right])
@@ -46,7 +46,9 @@ public:
             left--;
             right++;
         }
-        return right - left - 1;// i,i+1会返0
+        // 双中心不相等：i,i+1会返0
+        // 单中心左右俩不想等：i-1,i+1会返回1
+        return (right - left + 1) - 2;// 复习：这里right - left + 1是长度，-2是因为不等才出循环   
     }
 };
 

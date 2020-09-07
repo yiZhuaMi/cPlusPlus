@@ -51,43 +51,6 @@ public:
         p->next = l1 == NULL ? l2 : l1;// 把剩下的追加
         return h->next;
     }
-    
-    ListNode* s2ortList(ListNode* head) {
-        if (head == nullptr)
-            return head;
-        ListNode *fast = head, *slow = head, *pre_slow = head;
-        while (fast != nullptr && fast->next != nullptr)
-        {
-            pre_slow = slow;
-            fast = fast->next->next;
-            slow = slow->next;
-        }
-        pre_slow->next = nullptr;
-        return me2rge(s2ortList(head),s2ortList(slow));
-    }
-
-    ListNode* me2rge(ListNode* l1, ListNode* l2) {
-        ListNode *h = new ListNode(-1), *p = h;
-        while (l1 != nullptr && l2 != nullptr)
-        {
-            if (l1->val <= l2->val)
-            {
-                p->next = l1;
-                l1 = l1->next;
-            }
-            else
-            {
-                p->next = l2;
-                l2 = l2->next;
-            }
-            p = p->next;
-        }
-        p->next = l1 == nullptr ? l2 : l1;
-        return h->next;
-    }
-
-
-
 
     void pringList(ListNode* head)
     {

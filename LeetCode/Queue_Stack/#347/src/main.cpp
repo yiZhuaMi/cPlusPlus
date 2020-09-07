@@ -43,6 +43,25 @@ public:
         }
         return vector<int>(res.rbegin(),res.rend());
     }
+
+    vector<int> topKFrequent2(vector<int>& nums, int k) {
+        unordered_map<int,int> m;
+        for (auto n : nums)
+            m[n]++;
+        // 大顶堆
+        priority_queue<pair<int,int>,vector<pair<int,int>>,less<pair<int,int>>> q;
+        for (auto ite = m.begin(); ite != m.end(); ite++)
+        {
+            q.push(pair<int,int>(ite->second,ite->first));
+        }
+        vector<int> res;
+        while (k--)
+        {
+            res.push_back(q.top().second);
+            q.pop();
+        }
+        return res;
+    }
 };
 
 int main()

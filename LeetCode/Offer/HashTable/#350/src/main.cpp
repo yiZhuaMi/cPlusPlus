@@ -31,12 +31,11 @@ public:
             m[i]++;
         for (auto j : nums2)
         {
-            auto ite = m.find(j);
-            if (ite != m.end())
+            if (m.find(j) != m.end())
             {
                 res.push_back(j);
-                if (--ite->second <= 0)
-                    m.erase(ite);
+                if (--m[j] <= 0)
+                    m.erase(j);
             }
         }
         return res;

@@ -93,7 +93,7 @@ public:
     }
 
     // dfs
-    size_t res = 0;// SIZE_T ！！！！！！！！！！
+    size_t res = 0;// 复习：3处SIZE_T ！！！！！！！！！！
     map<int,size_t> m;// 保存这一层最左侧节点的ind
     int widthOfBinaryTree(TreeNode* root) {
         dfs(root,0,0);
@@ -104,6 +104,7 @@ public:
     {
         if (root == nullptr)
             return;
+        // 由于先左后右，某个level最先到来的肯定是最左边的
         if (m.find(level) == m.end())
             m[level] = ind;
         res = max(res,ind - m[level] + 1);

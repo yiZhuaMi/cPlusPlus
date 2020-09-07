@@ -19,25 +19,25 @@ public:
     int longestPalindromeSubseq(string s) {
         if (s.length() == 1)
             return 1;        
+        // 复习：只能把对角线置为1，其他地方必须为0
         vector<vector<int>> dp(s.length(), vector<int>(s.length(), 0));
         for (size_t i = 0; i < s.length(); i++)
             dp[i][i] = 1;// 指针都指向同一个位置，回文长度是1。
         
         // 遍历右上三角
-        for (int i = dp.size()-2; i >= 0; i--)// 为了保证(i,j)左、下、左下的dp都被计算出来，从倒数第二行往上
+        for (int i = dp.size()-2; i >= 0; i--)// 为了保证(i,j)左、下的dp都被计算出来，从倒数第二行往上
         {
             for (int j = i+1; j < dp[i].size(); j++)// 列 从左往右 对角线邮电第一个开始
             {
                 if (s[i] == s[j])// 新回文对
                 {
-                    dp[i][j] = dp[i+1][j-1] + 2;
+                    dp[i][j] = dp[i+1][j-1] + 2;// 复习：i+1 ~ j-1更短
                 }
                 else
                 {
-                    dp[i][j] = max(dp[i][j-1],dp[i+1][j]);// 分别加入 s[i+1..j-1] 中，看看哪个子串产生的回文子序列更长。
+                    dp[i][j] = max(dp[i][j-1],dp[i+1][j]);// 复习：分别加入 s[i+1..j-1] 中，看看哪个子串产生的回文子序列更长。
                 }                
             }
-            
         }
         return dp[0][s.length()-1];
     }

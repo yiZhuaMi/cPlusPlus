@@ -23,7 +23,7 @@ public:
             auto ite = m.find(nums[i]);
             if (ite != m.end())
             {
-                res.push_back(ite->second);
+                res.push_back(ite->second);// 重复的数字，直接使用之前的结果,O(1)
             }
             else
             {
